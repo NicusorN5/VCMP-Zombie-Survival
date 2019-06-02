@@ -81,14 +81,24 @@ function Survivor::Update()
 		}
 		if(this.player.Health <= 25) this.Down();
 	}
+	local oldHealth = this.player.Health;//used to detect uint8_t overflows
 	if(this.NeedToBeSaved)
 	{
 		this.player.Health -= 1;
-		if(this.player.Health == 1)
+		if(this.player.Spawned)
 		{
-			this.player.Frozen = false;
-			this.player.Kill();
-			::Message(RED+this.player+" was killed by zombies!");
+			if(this.player.Health > oldHealth)
+			{
+				this.player.Frozen = false;
+				this.player.Kill();
+				::Message(RED+this.player+" was killed by zombies!");
+			}
+			else if(this.player.Health == 1)
+			{
+				this.player.Frozen = false;
+				this.player.Kill();
+				::Message(RED+this.player+" was killed by zombies!");
+			}
 		}
 		if(this.FastRevive)
 		{
@@ -107,6 +117,12 @@ function Survivor::Update()
 		{
 			::Announce("~o~GET BACK TO THE FIGHTNING ZONE COMRADE!",this.player,0);
 			this.player.Health -= 5;
+			if(this.FastHealthRegen) this.player.Health -= 4;
+			if(this.player.Health > oldHealth)
+			{
+				player.Kill();
+				::Message("[#ff0000]"+player+" is a traitor. He didn't got back to the fighting zone.");
+			}
 		}
 		else if(ZOMBIE_IMMUNITY >0 )
 		{
@@ -465,7 +481,7 @@ function UpdateS()
 			CreateExplosion(ZOMBIE_WORLD,2,LOADEDMAP.spawn1,-1,false);
 			CreateExplosion(ZOMBIE_WORLD,2,LOADEDMAP.spawn2,-1,false);
 			CreateExplosion(ZOMBIE_WORLD,2,LOADEDMAP.spawn3,-1,false);
-			SetWeather(666);
+			SetWeather(111);
 			ZOMBIE_REMAINING = 0;
 			ZOMBIE_NUKE_TIMER = -30;
 			ZOMBIE_IMMUNITY = 0;

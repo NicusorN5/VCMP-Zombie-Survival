@@ -9864,4 +9864,1348 @@ AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'ta
 
 CALLSTACK
 *FUNCTION [AddInChopper()] scripts/hunter-chopper.nut line [29]
-*FUNCTION [GetKillStreakReward()] scripts/zombie.nut line [259
+*FUNCTION [GetKillStreakReward()] scripts/zombie.nut line [259[MODULE]  Loaded SqVCMP 0.4 frontend by Stormeus. (v1.0)
+[SCRIPT]  Loading scripts...
+[SCRIPT]  <=====================================>
+[SCRIPT]  VC:MP Zombie Survival 0.3 by Athanatos
+[SCRIPT]  <== GOLDEN WEAPONS UPDATE ==>
+[SCRIPT]  <=====================================>
+[SCRIPT]  Scripts Loaded Successfully!
+[SCRIPT]  You are free to modify, publish and host this server how much you want, BUT please keep a little credit to me(Athanatos)
+[SCRIPT]  [DS]ReborN: you don't make seerver?
+[SCRIPT]  Athanatos: server crashed
+[SCRIPT]  [DS]ReborN: for my clan
+[SCRIPT]  Athanatos: i didnt say i wont
+[SCRIPT]  Athanatos: i will next weeks
+[SCRIPT]  Athanatos: since im busy with high school too
+[SCRIPT]  [DS]ReborN: Athanatos when you makke?
+[SCRIPT]  OhMaGawd: will it be useful?
+[SCRIPT]  Athanatos: 2 weeks
+[SCRIPT]  OhMaGawd: fan
+[SCRIPT]  OhMaGawd: You think it will be useful?
+[SCRIPT]  Athanatos: it works nice
+[SCRIPT]  Athanatos: lemme make an other change
+[SCRIPT]  OhMaGawd: and also if you freeze someone he wont die
+[SCRIPT]  OhMaGawd: so revive is useless
+[SCRIPT]  [DS]ReborN: Turinka
+[SCRIPT]  Turinka: ?
+[SCRIPT]  [DS]ReborN: Turinka love me
+[SCRIPT]  OhMaGawd: I love you
+[SCRIPT]  Turinka: im not gay sorry
+[SCRIPT]  OhMaGawd: I am gay
+[SCRIPT]  [DS]ReborN: where are you from turinka
+[SCRIPT]  OhMaGawd: kiss
+[SCRIPT]  OhMaGawd: kiss me
+[SCRIPT]  Turinka: ukraine
+[SCRIPT]  [DS]ReborN: in dick
+[SCRIPT]  [DS]ReborN: pussy.
+[SCRIPT]  Loading scripts...
+[SCRIPT]  <=====================================>
+[SCRIPT]  VC:MP Zombie Survival 0.3 by Athanatos
+[SCRIPT]  <== GOLDEN WEAPONS UPDATE ==>
+[SCRIPT]  <=====================================>
+[SCRIPT]  Scripts Loaded Successfully!
+[SCRIPT]  You are free to modify, publish and host this server how much you want, BUT please keep a little credit to me(Athanatos)
+[MODULE]  Scripts reloaded.
+[SCRIPT]  OhMaGawd: oh ma gawd
+[SCRIPT]  [DS]ReborN: how to cghange skin
+[SCRIPT]  OhMaGawd: athanatos
+[SCRIPT]  [DS]ReborN: aThantos
+[SCRIPT]  Athanatos:  /skin <id>
+[SCRIPT]  Athanatos: ?
+[SCRIPT]  OhMaGawd: you getting any error?
+[SCRIPT]  Athanatos: nope
+[SCRIPT]  OhMaGawd: check
+[SCRIPT]  [DS]ReborN: brb
+[SCRIPT]  Athanatos: why?
+[SCRIPT]  OhMaGawd: bekauze
+[SCRIPT]  OhMaGawd: you checked?
+[SCRIPT]  Athanatos: yes
+[SCRIPT]  Athanatos: no errors
+[SCRIPT]  OhMaGawd: weird
+[SCRIPT]  Athanatos: everything is fine
+[SCRIPT]  Athanatos: why?
+[SCRIPT]  OhMaGawd: noting
+[SCRIPT]  OhMaGawd: btw i feel so sexy
+
+AN ERROR HAS OCCURED [the index 'Revive' does not exist]
+
+CALLSTACK
+*FUNCTION [onClientScriptData()] scripts/main.nut line [509]
+
+LOCALS
+[s] "[#ff0000]You are too far from that player!"
+[d] 20.658861160278
+[s] INSTANCE
+[str] ""
+[integer] 5
+[player] INSTANCE
+[this] TABLE
+
+AN ERROR HAS OCCURED [the index 'Revive' does not exist]
+
+CALLSTACK
+*FUNCTION [onClientScriptData()] scripts/main.nut line [509]
+
+LOCALS
+[s] "[#ff0000]You are too far from that player!"
+[d] 16.513442993164
+[s] INSTANCE
+[str] ""
+[integer] 5
+[player] INSTANCE
+[this] TABLE
+
+AN ERROR HAS OCCURED [the index 'Revive' does not exist]
+
+CALLSTACK
+*FUNCTION [onClientScriptData()] scripts/main.nut line [509]
+
+LOCALS
+[s] "[#ff0000]You are too far from that player!"
+[d] 12.984925270081
+[s] INSTANCE
+[str] ""
+[integer] 5
+[player] INSTANCE
+[this] TABLE
+
+AN ERROR HAS OCCURED [the index 'Revive' does not exist]
+
+CALLSTACK
+*FUNCTION [onClientScriptData()] scripts/main.nut line [509]
+
+LOCALS
+[s] "[#ff0000]You are too far from that player!"
+[d] 9.7529878616333
+[s] INSTANCE
+[str] ""
+[integer] 5
+[player] INSTANCE
+[this] TABLE
+
+AN ERROR HAS OCCURED [the index 'Revive' does not exist]
+
+CALLSTACK
+*FUNCTION [onClientScriptData()] scripts/main.nut line [509]
+
+LOCALS
+[s] "[#ff0000]You are too far from that player!"
+[d] 7.8159475326538
+[s] INSTANCE
+[str] ""
+[integer] 5
+[player] INSTANCE
+[this] TABLE
+
+AN ERROR HAS OCCURED [the index 'Revive' does not exist]
+
+CALLSTACK
+*FUNCTION [onClientScriptData()] scripts/main.nut line [509]
+
+LOCALS
+[s] "[#ff0000]You are too far from that player!"
+[d] 6.6478214263916
+[s] INSTANCE
+[str] ""
+[integer] 5
+[player] INSTANCE
+[thi[MODULE]  Loaded SqVCMP 0.4 frontend by Stormeus. (v1.0)
+[SCRIPT]  Loading scripts...
+[SCRIPT]  <=====================================>
+[SCRIPT]  VC:MP Zombie Survival 0.3 by Athanatos
+[SCRIPT]  <== GOLDEN WEAPONS UPDATE ==>
+[SCRIPT]  <=====================================>
+[SCRIPT]  Scripts Loaded Successfully!
+[SCRIPT]  You are free to modify, publish and host this server how much you want, BUT please keep a little credit to me(Athanatos)
+[SCRIPT]  Athanatos: server was filled up with errors
+[SCRIPT]  Turinka: ok
+[SCRIPT]  Athanatos: jump
+[SCRIPT]  Athanatos: it works fine
+[SCRIPT]  Turinka: i see
+[SCRIPT]  Athanatos: the revival system
+[SCRIPT]  Athanatos: i should add a sound effect tho
+[SCRIPT]  Athanatos: IT WORKS
+[SCRIPT]  OhMaGawd: does he even do any damage
+[SCRIPT]  Athanatos: lmfao
+[SCRIPT]  Athanatos: i should fix that
+[SCRIPT]  OhMaGawd: zombie.exe stopped working
+[SCRIPT]  Athanatos: it damages me
+[SCRIPT]  Athanatos: vcmp in a nutshell
+[SCRIPT]  OhMaGawd: gi gi
+[SCRIPT]  [G4_T]InfinitoProYT: hi
+[SCRIPT]  OhMaGawd: die
+[SCRIPT]  Athanatos: i should take a look at the damage system
+[SCRIPT]  OhMaGawd: oh ma gawd
+[SCRIPT]  Loading scripts...
+[SCRIPT]  <=====================================>
+[SCRIPT]  VC:MP Zombie Survival 0.3 by Athanatos
+[SCRIPT]  <== GOLDEN WEAPONS UPDATE ==>
+[SCRIPT]  <=====================================>
+[SCRIPT]  Scripts Loaded Successfully!
+[SCRIPT]  You are free to modify, publish and host this server how much you want, BUT please keep a little credit to me(Athanatos)
+[MODULE]  Scripts reloaded.
+[SCRIPT]  Loading scripts...
+[SCRIPT]  <=====================================>
+[SCRIPT]  VC:MP Zombie Survival 0.3 by Athanatos
+[SCRIPT]  <== GOLDEN WEAPONS UPDATE ==>
+[SCRIPT]  <=====================================>
+[SCRIPT]  Scripts Loaded Successfully!
+[SCRIPT]  You are free to modify, publish and host this server how much you want, BUT please keep a little credit to me(Athanatos)
+[MODULE]  Scripts reloaded.
+[SCRIPT]  Athanatos: nah
+[SCRIPT]  Athanatos: owo
+[SCRIPT]  Athanatos: [#FFFFFF]Loaded Map:Hospital Difficulty :VIRTUALLY IMPOSSIBLE
+[SCRIPT]  [G4_T]InfinitoProYT: count system
+[SCRIPT]  Athanatos: this is interesting
+[SCRIPT]  OhMaGawd: zombie ate ma ass
+[SCRIPT]  [G4_T]InfinitoProYT: add mpa joil system
+[SCRIPT]  Athanatos: what?
+[SCRIPT]  OhMaGawd: wooot
+[SCRIPT]  [G4_T]InfinitoProYT: jail system retunt zone
+[SCRIPT]  Athanatos: HOLY FUCK
+[SCRIPT]  Athanatos: help
+[SCRIPT]  Athanatos: ZOMBIES ARE OP
+[SCRIPT]  OhMaGawd: I like to eat ass
+[SCRIPT]  [G4_T]InfinitoProYT: no fount R
+[SCRIPT]  Athanatos: lol
+[SCRIPT]  Loading scripts...
+[SCRIPT]  <=====================================>
+[SCRIPT]  VC:MP Zombie Survival 0.3 by Athanatos
+[SCRIPT]  <== GOLDEN WEAPONS UPDATE ==>
+[SCRIPT]  <=====================================>
+[SCRIPT]  Scripts Loaded Successfully!
+[SCRIPT]  You are free to modify, publish and host this server how much you want, BUT please keep a little credit to me(Athanatos)
+[MODULE]  Scripts reloaded.
+[SCRIPT]  OhMaGawd: I like dick
+[SCRIPT]  Athanatos: in your ass or mouth?
+[SCRIPT]  OhMaGawd: every where
+[SCRIPT]  OhMaGawd: everywhewre
+[SCRIPT]  OhMaGawd: wow
+[SCRIPT]  OhMaGawd: bruh\
+[SCRIPT]  Athanatos: nigga really?
+[SCRIPT]  OhMaGawd: this server is so rekt
+[SCRIPT]  Athanatos: ahh shit m8
+[SCRIPT]  Athanatos: an other shitty bug
+[SCRIPT]  OhMaGawd: hahaha
+[SCRIPT]  OhMaGawd: bugged af
+[SCRIPT]  Athanatos: what is bugged?
+[SCRIPT]  KaKaChi^BL: hey Athanatos
+[SCRIPT]  Athanatos: hey
+[SCRIPT]  KaKaChi^BL: come to Romania ?
+[SCRIPT]  KaKaChi^BL: cops n robbers ?
+[SCRIPT]  KaKaChi^BL: I dont have any server ;(
+[SCRIPT]  KaKaChi^BL: I dont have any server ;(
+[SCRIPT]  KaKaChi^BL: I dont have any server ;(
+[SCRIPT]  KaKaChi^BL: cops n robbers ?
+[SCRIPT]  KaKaChi^BL: cops n robbers ?
+[SCRIPT]  KaKaChi^BL: I dont have any server ;(
+[SCRIPT]  KaKaChi^BL: :(
+[SCRIPT]  KaKaChi^BL: I want server
+[SCRIPT]  Athanatos: okeee
+[SCRIPT]  Loading scripts...
+[SCRIPT]  <=====================================>
+[SCRIPT]  VC:MP Zombie Survival 0.3 by Athanatos
+[SCRIPT]  <== GOLDEN WEAPONS UPDATE ==>
+[SCRIPT]  <=====================================>
+[SCRIPT]  Scripts Loaded Successfully!
+[SCRIPT]  You are free to modify, publish and host this server how much you want, BUT please keep a little credit to me(Athanatos)
+[MODULE]  Scripts reloaded.
+[SCRIPT]  KaKaChi^BL: you will give me server ?
+[SCRIPT]  Athanatos: no\
+[SCRIPT]  Athanatos: not that
+[SCRIPT]  KaKaChi^BL: what ?
+[SCRIPT]  KaKaChi^BL: give me founder of Romania ?
+[SCRIPT]  Athanatos: i said ok because i fixed some stuff
+[SCRIPT]  Athanatos: no
+[SCRIPT]  KaKaChi^BL: where staff
+[SCRIPT]  KaKaChi^BL: this server ?
+[SCRIPT]  Athanatos: this server has no staff
+[SCRIPT]  Athanatos: WTG
+[SCRIPT]  KaKaChi^BL: Athanatos
+[SCRIPT]  Athanatos: ?
+[SCRIPT]  KaKaChi^BL: I want server :D
+[SCRIPT]  Athanatos: wtf
+[SCRIPT]  KaKaChi^BL: wtf
+[SCRIPT]  KaKaChi^BL: me Pos ?
+[SCRIPT]  KaKaChi^BL: Athanats
+[SCRIPT]  KaKaChi^BL: Athanatos
+[SCRIPT]  KaKaChi^BL: Athanatos
+[SCRIPT]  Athanatos: wtf dude
+[SCRIPT]  KaKaChi^BL: what you do
+[SCRIPT]  KaKaChi^BL: give me server :D
+[SCRIPT]  KaKaChi^BL: give me server :D
+[SCRIPT]  Athanatos: shit
+[SCRIPT]  KaKaChi^BL: ATHANATOS
+[SCRIPT]  Athanatos: what do you want?
+[SCRIPT]  KaKaChi^BL: server :D
+[SCRIPT]  Athanatos: no
+[SCRIPT]  KaKaChi^BL: I like all your servers
+[SCRIPT]  KaKaChi^BL: I like all your servers
+[SCRIPT]  KaKaChi^BL: I like all your servers
+[SCRIPT]  Athanatos: and?
+[SCRIPT]  KaKaChi^BL: you too
+[SCRIPT]  KaKaChi^BL: :D
+[SCRIPT]  Athanatos: by giving me compliments you hope i will give you rcnr?
+[SCRIPT]  Athanatos: wont happen
+[SCRIPT]  OhMaGawd: oh ma gawd i got kicked
+[SCRIPT]  Athanatos: yes
+[SCRIPT]  OhMaGawd: why 
+[SCRIPT]  Athanatos: because you bugged the server
+[SCRIPT]  Athanatos: lmfao
+[SCRIPT]  OhMaGawd: kul
+[SCRIPT]  OhMaGawd: Thats the only reason i join any server tbh
+[SCRIPT]  Athanatos: lol?
+[SCRIPT]  KaKaChi^BL: Athanatos
+[SCRIPT]  OhMaGawd: checking the scripters level
+[SCRIPT]  KaKaChi^BL: pleae bro give me rcnr
+[SCRIPT]  Athanatos: WETF
+[SCRIPT]  Loading scripts...
+[SCRIPT]  <=====================================>
+[SCRIPT]  VC:MP Zombie Survival 0.3 by Athanatos
+[SCRIPT]  <== GOLDEN WEAPONS UPDATE ==>
+[SCRIPT]  <=====================================>
+[SCRIPT]  Scripts Loaded Successfully!
+[SCRIPT]  You are free to modify, publish and host this server how much you want, BUT please keep a little credit to me(Athanatos)
+[MODULE]  Scripts reloaded.
+[SCRIPT]  OhMaGawd: heheeh
+[SCRIPT]  KaKaChi^BL: Athanatis
+[SCRIPT]  KaKaChi^BL: Athanatios
+[SCRIPT]  Athanatos: ????
+[SCRIPT]  OhMaGawd: 250 hp
+[SCRIPT]  KaKaChi^BL: you will give me rcnr ?
+[SCRIPT]  Athanatos: ofc not
+[SCRIPT]  KaKaChi^BL: I will very happy
+[SCRIPT]  OhMaGawd: revive system bugged af
+[SCRIPT]  KaKaChi^BL: ;(
+[SCRIPT]  KaKaChi^BL: okay
+[SCRIPT]  OhMaGawd: Give me a kiss i will very happy
+[SCRIPT]  OhMaGawd: I am frozen
+[SCRIPT]  KaKaChi^BL: Athanatos
+[SCRIPT]  OhMaGawd: cause of that shitty revive system
+[SCRIPT]  KaKaChi^BL: Athanatos
+[SCRIPT]  KaKaChi^BL: give me server ;(
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [121]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [367]
+
+LOCALS
+[oldHealth] 4
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 0
+[players_remaining] 1
+[ZombiesToSpawn] 1
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [121]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [367]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 0
+[players_remaining] 1
+[ZombiesToSpawn] 1
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [121]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [367]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 1
+[players_remaining] 1
+[ZombiesToSpawn] 1
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [121]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [367]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 1
+[players_remaining] 1
+[ZombiesToSpawn] 1
+[this] TABLE
+[SCRIPT]  KaKaChi^BL: Athanatos
+[SCRIPT]  KaKaChi^BL: give me server ;(
+[SCRIPT]  OhMaGawd: zhut up
+[SCRIPT]  OhMaGawd: unfreeze me
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [121]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [367]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 2
+[players_remaining] 3
+[ZombiesToSpawn] 0
+[this] TABLE
+[SCRIPT]  Athanatos: lol
+[SCRIPT]  Athanatos: nice bug\
+[SCRIPT]  OhMaGawd: hehehehe
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [121]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [367]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 2
+[players_remaining] 3
+[ZombiesToSpawn] 2
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [121]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [367]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 2
+[players_remaining] 3
+[ZombiesToSpawn] 2
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [121]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [367]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 2
+[players_remaining] 3
+[ZombiesToSpawn] 2
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [121]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [367]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 2
+[players_remaining] 3
+[ZombiesToSpawn] 2
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [121]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [367]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 2
+[players_remaining] 3
+[ZombiesToSpawn] 2
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [121]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [367]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 2
+[players_remaining] 3
+[ZombiesToSpawn] 2
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [121]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [367]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 2
+[players_remaining] 3
+[ZombiesToSpawn] 2
+[this] TABLE
+[SCRIPT]  OhMaGawd: KaKachi
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [121]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [367]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 2
+[players_remaining] 3
+[ZombiesToSpawn] 2
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [121]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [367]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 2
+[players_remaining] 3
+[ZombiesToSpawn] 2
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [121]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [367]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 2
+[players_remaining] 3
+[ZombiesToSpawn] 2
+[this] TABLE
+[SCRIPT]  KaKaChi^BL: ?
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [121]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [367]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 2
+[players_remaining] 3
+[ZombiesToSpawn] 2
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [121]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [367]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 2
+[players_remaining] 3
+[ZombiesToSpawn] 2
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [121]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [367]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 2
+[players_remaining] 3
+[ZombiesToSpawn] 2
+[this] TABLE
+[SCRIPT]  OhMaGawd: I am your lord
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [121]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [367]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 2
+[players_remaining] 3
+[ZombiesToSpawn] 2
+[this] TABLE
+[SCRIPT]  OhMaGawd: and savior
+[SCRIPT]  KaKaChi^BL: -_-
+[SCRIPT]  Loading scripts...
+[SCRIPT]  <=====================================>
+[SCRIPT]  VC:MP Zombie Survival 0.3 by Athanatos
+[SCRIPT]  <== GOLDEN WEAPONS UPDATE ==>
+[SCRIPT]  <=====================================>
+[SCRIPT]  Scripts Loaded Successfully!
+[SCRIPT]  You are free to modify, publish and host this server how much you want, BUT please keep a little credit to me(Athanatos)
+[MODULE]  Scripts reloaded.
+[SCRIPT]  OhMaGawd: you are king1 or 2?
+[SCRIPT]  OhMaGawd: ahhaha
+[SCRIPT]  OhMaGawd: you are king1 or 2?
+[SCRIPT]  KaKaChi^BL: Athanatos
+[SCRIPT]  KaKaChi^BL: ;(
+[SCRIPT]  OhMaGawd: i can shot but i cant move
+[SCRIPT]  OhMaGawd: wow
+[SCRIPT]  KaKaChi^BL: Athanatos
+[SCRIPT]  KaKaChi^BL: ;(
+[SCRIPT]  Athanatos: tf
+[SCRIPT]  KaKaChi^BL: you know
+[SCRIPT]  OhMaGawd: I am xhefri 
+[SCRIPT]  Athanatos: ik
+[SCRIPT]  Athanatos: FFFUUUUUUUUUUUUUUUUUUUUUCK
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [124]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [370]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 1
+[players_remaining] 2
+[ZombiesToSpawn] 2
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [124]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [370]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 1
+[players_remaining] 2
+[ZombiesToSpawn] 2
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [124]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [370]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 0
+[players_remaining] 1
+[ZombiesToSpawn] 2
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [124]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [370]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 0
+[players_remaining] 1
+[ZombiesToSpawn] 2
+[this] TABLE
+[SCRIPT]  KaKaChi^BL: Athanatos
+[SCRIPT]  OhMaGawd: I was saying to my fan kakachi actually
+[SCRIPT]  OhMaGawd: well
+[SCRIPT]  KaKaChi^BL: you not Xhefri
+[SCRIPT]  OhMaGawd: Yes i am
+[SCRIPT]  OhMaGawd: the one and only
+[SCRIPT]  KaKaChi^BL: what is your server ?
+[SCRIPT]  OhMaGawd: my server
+[MODULE]  Loaded SqVCMP 0.4 frontend by Stormeus. (v1.0)
+[SCRIPT]  Loading scripts...
+[SCRIPT]  <=====================================>
+[SCRIPT]  VC:MP Zombie Survival 0.3 by Athanatos
+[SCRIPT]  <== GOLDEN WEAPONS UPDATE ==>
+[SCRIPT]  <=====================================>
+[SCRIPT]  Scripts Loaded Successfully!
+[SCRIPT]  You are free to modify, publish and host this server how much you want, BUT please keep a little credit to me(Athanatos)
+[SCRIPT]  Athanatos: -2.96418
+[SCRIPT]  KaKaChi^BL: ????
+[SCRIPT]  KaKaChi^BL: Athanatos
+[SCRIPT]  KaKaChi^BL: give me Admin in the server
+[SCRIPT]  Athanatos: t/scriptreload
+[SCRIPT]  Loading scripts...
+[SCRIPT]  <=====================================>
+[SCRIPT]  VC:MP Zombie Survival 0.3 by Athanatos
+[SCRIPT]  <== GOLDEN WEAPONS UPDATE ==>
+[SCRIPT]  <=====================================>
+[SCRIPT]  Scripts Loaded Successfully!
+[SCRIPT]  You are free to modify, publish and host this server how much you want, BUT please keep a little credit to me(Athanatos)
+[MODULE]  Scripts reloaded.
+[SCRIPT]  Athanatos: lol
+
+AN ERROR HAS OCCURED [the index 'NeedToBeSaved' does not exist]
+
+CALLSTACK
+*FUNCTION [onClientScriptData()] scripts/main.nut line [469]
+
+LOCALS
+[s] NULL
+[str] ""
+[integer] 5
+[player] INSTANCE
+[this] TABLE
+[SCRIPT]  Athanatos: i disabled the gamemode
+[SCRIPT]  KaKaChi^BL: I cant
+[SCRIPT]  KaKaChi^BL: Iam very love rcnr ;( ;(
+[SCRIPT]  KaKaChi^BL: Athanatos
+[SCRIPT]  KaKaChi^BL: give me Admin in the server
+[SCRIPT]  Athanatos: what server?
+[SCRIPT]  OhMaGawd: god damn it
+[SCRIPT]  KaKaChi^BL: this
+[SCRIPT]  Athanatos: discord?
+[SCRIPT]  Athanatos: lol noob
+[SCRIPT]  KaKaChi^BL: yes
+[SCRIPT]  OhMaGawd: Athanatos
+[SCRIPT]  OhMaGawd: give me Admin in the server
+[SCRIPT]  KaKaChi^BL: -_-
+[SCRIPT]  Athanatos: no
+[SCRIPT]  OhMaGawd: no
+[SCRIPT]  Athanatos: this one doesnt not have admin server
+[SCRIPT]  Athanatos: admin system*
+[SCRIPT]  OhMaGawd: this one doesnt not have admin server
+[SCRIPT]  OhMaGawd: admin system*
+[SCRIPT]  Athanatos: lol
+[SCRIPT]  Athanatos: (-1136.09, -717.701, 11.7067)
+[SCRIPT]  OhMaGawd: ye poly isnt working
+[SCRIPT]  KaKaChi^BL: Xhefri
+[SCRIPT]  OhMaGawd: or you use distance to point
+[SCRIPT]  KaKaChi^BL: what is your other name ?
+[SCRIPT]  OhMaGawd: whatever is not working
+[SCRIPT]  Athanatos: kakachi
+[SCRIPT]  KaKaChi^BL: ?
+[SCRIPT]  Athanatos: exit the car
+[SCRIPT]  OhMaGawd: my other name is Xhefri
+[SCRIPT]  Athanatos: i need it
+[SCRIPT]  KaKaChi^BL: nope
+[SCRIPT]  KaKaChi^BL: Harold
+[SCRIPT]  KaKaChi^BL: wait
+[SCRIPT]  OhMaGawd: Harold is my sister
+[SCRIPT]  Athanatos: lol
+[SCRIPT]  KaKaChi^BL: waitNO
+[SCRIPT]  KaKaChi^BL: NO
+[SCRIPT]  Athanatos: (-921.441, -1047.1, 14.4507)
+[SCRIPT]  OhMaGawd: hahah
+[SCRIPT]  OhMaGawd: btw athanatos 
+[SCRIPT]  OhMaGawd: why do you use this server to get coordinates?
+[SCRIPT]  Athanatos: coordinates for an other arena
+[SCRIPT]  OhMaGawd: just use a local one bruh to edit the script
+[SCRIPT]  Athanatos: (-1028.7, -909.357, 13.8489)
+[SCRIPT]  Athanatos: this server is in my localhost btw
+[SCRIPT]  OhMaGawd: hmm
+[SCRIPT]  KaKaChi^BL: what you do Athanatos?
+[SCRIPT]  OhMaGawd: sex
+[SCRIPT]  OhMaGawd: I can create a cool base athanatos 
+[SCRIPT]  OhMaGawd: Another day when i am in a better mood tho
+[SCRIPT]  Athanatos: 0.780329
+[SCRIPT]  Athanatos: (-1033.42, -842.443, 13.0852)
+[SCRIPT]  Athanatos: (-1034.18, -847.141, 13.0852)
+[SCRIPT]  KaKaChi^BL: what you do ?
+[SCRIPT]  OhMaGawd: Athanatos
+[SCRIPT]  Athanatos: ?
+[SCRIPT]  Athanatos: (-1039.5, -886.733, 13.6245)
+[SCRIPT]  OhMaGawd: you have any base in downtown?
+[SCRIPT]  Athanatos: nah
+[SCRIPT]  Athanatos: (-1026.19, -906.372, 14.0892)
+[SCRIPT]  OhMaGawd: hmm
+[SCRIPT]  KaKaChi^BL: xD
+[SCRIPT]  KaKaChi^BL: hmm
+[SCRIPT]  OhMaGawd: I will create one
+[SCRIPT]  OhMaGawd: KaKachi
+[SCRIPT]  KaKaChi^BL: ?
+[SCRIPT]  OhMaGawd: my love
+[SCRIPT]  Athanatos: (-977.815, -882.934, 13.0613)
+[SCRIPT]  KaKaChi^BL: what you want my porn
+[SCRIPT]  OhMaGawd: Yes please
+[SCRIPT]  Loading scripts...
+[SCRIPT]  <=====================================>
+[SCRIPT]  VC:MP Zombie Survival 0.3 by Athanatos
+[SCRIPT]  <== GOLDEN WEAPONS UPDATE ==>
+[SCRIPT]  <=====================================>
+[SCRIPT]  Scripts Loaded Successfully!
+[SCRIPT]  You are free to modify, publish and host this server how much you want, BUT please keep a little credit to me(Athanatos)
+[MODULE]  Scripts reloaded.
+[SCRIPT]  Loading scripts...
+[SCRIPT]  <=====================================>
+[SCRIPT]  VC:MP Zombie Survival 0.3 by Athanatos
+[SCRIPT]  <== GOLDEN WEAPONS UPDATE ==>
+[SCRIPT]  <=====================================>
+[SCRIPT]  Scripts Loaded Successfully!
+[SCRIPT]  You are free to modify, publish and host this server how much you want, BUT please keep a little credit to me(Athanatos)
+[MODULE]  Scripts reloaded.
+[SCRIPT]  OhMaGawd: wot da fuk
+[SCRIPT]  KaKaChi^BL: guys
+[SCRIPT]  Athanatos: ???
+[SCRIPT]  Athanatos: i made a new arena
+[SCRIPT]  Athanatos: this one
+[SCRIPT]  OhMaGawd: ye
+[SCRIPT]  OhMaGawd: kul
+[SCRIPT]  Noobey: where is zombie
+[SCRIPT]  Athanatos: oh fukc
+[SCRIPT]  Noobey: where is zombie
+[SCRIPT]  Athanatos: gg
+[SCRIPT]  Athanatos: fixed it
+[SCRIPT]  Athanatos: match starting
+[SCRIPT]  KaKaChi^BL: Athanatos
+[SCRIPT]  Athanatos: sorry for not enabling the gamemode
+[SCRIPT]  KaKaChi^BL: change this server of RPG and DM
+[SCRIPT]  Athanatos: ?
+[SCRIPT]  KaKaChi^BL: change this server of RPG and DM
+[SCRIPT]  KaKaChi^BL: change this server of RPG and DM
+[SCRIPT]  KaKaChi^BL: change this server of RPG and DM
+[SCRIPT]  KaKaChi^BL: change this server of RPG and DM
+[SCRIPT]  KaKaChi^BL: change this server of RPG and DM
+[SCRIPT]  KaKaChi^BL: change this server of RPG and DM
+[SCRIPT]  KaKaChi^BL: change this server of RPG and DM
+[SCRIPT]  KaKaChi^BL: change this server of RPG and DM
+[SCRIPT]  Athanatos: no
+[SCRIPT]  KaKaChi^BL: Xhefri ?
+[SCRIPT]  KaKaChi^BL: Xhefri ?
+[SCRIPT]  Noobey: where is zombie
+[SCRIPT]  Athanatos: cant u read?
+[SCRIPT]  KaKaChi^BL: Xhefri ?
+[SCRIPT]  Athanatos: time left until next round?
+[SCRIPT]  KaKaChi^BL: Xhefri ?
+[SCRIPT]  VANC: server noop
+[SCRIPT]  KaKaChi^BL: Athanatos
+[SCRIPT]  KaKaChi^BL: <3
+[SCRIPT]  Athanatos: ???/
+[SCRIPT]  VANC: server noop
+[SCRIPT]  Athanatos: what do you man by noop?
+[SCRIPT]  KaKaChi^BL: fuck you
+[SCRIPT]  KaKaChi^BL: VANC
+[SCRIPT]  KaKaChi^BL: Athanatos
+[SCRIPT]  KaKaChi^BL: he will back ban him okay ?
+[SCRIPT]  KaKaChi^BL: Athanatos
+[SCRIPT]  KaKaChi^BL: bye bro
+[SCRIPT]  Athanatos: yeah bye
+[SCRIPT]  KaKaChi^BL: I go to Romania cops n robber
+[SCRIPT]  KaKaChi^BL: I go to Romania cops n robbers
+[SCRIPT]  Athanatos: ok
+[SCRIPT]  KaKaChi^BL: I go to Romania cops n robbers
+[SCRIPT]  OhMaGawd: wow
+[SCRIPT]  OhMaGawd: you can add CreateObject right?
+[SCRIPT]  Athanatos: what are the zombies?
+[SCRIPT]  Athanatos: LMFAO
+[SCRIPT]  OhMaGawd: i know
+[SCRIPT]  OhMaGawd: but i mean
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [124]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [370]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 0
+[players_remaining] 1
+[ZombiesToSpawn] 2
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [124]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [370]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 0
+[players_remaining] 1
+[ZombiesToSpawn] 2
+[this] TABLE
+[SCRIPT]  OhMaGawd: Would it be better that way or with database?
+[SCRIPT]  Athanatos: i dunno
+[SCRIPT]  OhMaGawd: I just want to create a cool base for your server
+[SCRIPT]  OhMaGawd: since i have aloooot of free time
+[SCRIPT]  Athanatos: and?
+[SCRIPT]  OhMaGawd: now that school is over
+[SCRIPT]  Athanatos: my server is open source
+[SCRIPT]  OhMaGawd: i have nothing better to do
+[SCRIPT]  Athanatos: it is on github
+[SCRIPT]  OhMaGawd: bruh
+[SCRIPT]  OhMaGawd: who cares
+[SCRIPT]  OhMaGawd: I can give you the objects you add em
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [124]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [370]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 0
+[players_remaining] 1
+[ZombiesToSpawn] 10
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [124]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [370]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 0
+[players_remaining] 1
+[ZombiesToSpawn] 10
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [124]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [370]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 0
+[players_remaining] 1
+[ZombiesToSpawn] 10
+[this] TABLE
+[SCRIPT]  Athanatos: really
+[SCRIPT]  OhMaGawd: when i am done editing
+[SCRIPT]  mazen221: gg
+[SCRIPT]  OhMaGawd: gi gi
+[SCRIPT]  Athanatos: HELP
+[SCRIPT]  Athanatos: help
+[SCRIPT]  Athanatos: HEEELP
+[SCRIPT]  Athanatos: REVIVE ME
+[SCRIPT]  saifhafez2: t
+[SCRIPT]  mazen221: ttt
+[SCRIPT]  mazen221: t
+[SCRIPT]  mazen221: tt
+[SCRIPT]  mazen221: tt
+[SCRIPT]  mazen221: tt
+
+AN ERROR HAS OCCURED [wrong number of parameters]
+
+CALLSTACK
+*FUNCTION [LotteryItem()] scripts/zombie.nut line [560]
+*FUNCTION [onClientScriptData()] scripts/main.nut line [440]
+
+LOCALS
+[r] 6
+[player] INSTANCE
+[this] TABLE
+[price] 3000
+[id] 8
+[s] INSTANCE
+[str] "8 3000"
+[integer] 1
+[player] INSTANCE
+[this] TABLE
+[SCRIPT]  Athanatos: (-1029.09, -909.258, 14.1059)
+[SCRIPT]  mazen221: tt
+[SCRIPT]  mazen221: t
+[SCRIPT]  mazen221: tt
+[SCRIPT]  mazen221: tt
+[SCRIPT]  mazen221: tt
+[SCRIPT]  mazen221: tt
+[SCRIPT]  mazen221: t
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [124]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [370]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 1
+[players_remaining] 2
+[ZombiesToSpawn] 21
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [124]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [370]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 1
+[players_remaining] 2
+[ZombiesToSpawn] 21
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [124]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [370]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 1
+[players_remaining] 2
+[ZombiesToSpawn] 19
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [124]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [370]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 1
+[players_remaining] 2
+[ZombiesToSpawn] 14
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [124]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [370]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 1
+[players_remaining] 2
+[ZombiesToSpawn] 14
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [124]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [370]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 1
+[players_remaining] 2
+[ZombiesToSpawn] 11
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [124]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [370]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 1
+[players_remaining] 2
+[ZombiesToSpawn] 11
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [124]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [370]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 1
+[players_remaining] 2
+[ZombiesToSpawn] 9
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [124]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [370]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 1
+[players_remaining] 2
+[ZombiesToSpawn] 9
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [124]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [370]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 1
+[players_remaining] 2
+[ZombiesToSpawn] 9
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [124]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [370]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 1
+[players_remaining] 2
+[ZombiesToSpawn] 8
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [124]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [370]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 1
+[players_remaining] 2
+[ZombiesToSpawn] 7
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [124]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [370]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 1
+[players_remaining] 2
+[ZombiesToSpawn] 7
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [124]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [370]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 1
+[players_remaining] 2
+[ZombiesToSpawn] 7
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [124]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [370]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 1
+[players_remaining] 2
+[ZombiesToSpawn] 7
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [124]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [370]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 1
+[players_remaining] 2
+[ZombiesToSpawn] 7
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [124]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [370]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 1
+[players_remaining] 2
+[ZombiesToSpawn] 7
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [124]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [370]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 1
+[players_remaining] 2
+[ZombiesToSpawn] 7
+[this] TABLE
+
+AN ERROR HAS OCCURED [parameter 0 has an invalid type 'instance' ; expected: 'table']
+
+CALLSTACK
+*FUNCTION [Update()] scripts/zombie.nut line [124]
+*FUNCTION [UpdateS()] scripts/zombie.nut line [370]
+
+LOCALS
+[oldHealth] 0
+[this] INSTANCE
+[survivor] INSTANCE
+[player] INSTANCE
+[i] 1
+[players_remaining] 2
+[ZombiesToSpawn] 7
+[this] TAB

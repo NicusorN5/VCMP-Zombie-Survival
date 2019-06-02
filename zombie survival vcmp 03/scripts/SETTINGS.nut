@@ -1,3 +1,9 @@
+/*
+    SETTINGS FILE: Set server gamemode settings here.
+
+
+*/
+
 ///Creates an explosion on a zombie's death:
 ZOMBIEDEATHEX <- false;
 ///Default weapon
@@ -12,5 +18,5 @@ ZOMBIEDEFAULTWEAPONTHREE <- 26;
 ZOMBIEDEFAULTWEAPONTHREEAMMO <- 250;
 
 
-//DEBUG_MODE : For creating new maps!
+//DEBUG_MODE : For creating new maps! Disables the gamemode.
 ZOMBIE_DEBUG <- false;

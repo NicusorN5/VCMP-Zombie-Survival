@@ -21,13 +21,16 @@
 		✓ Buy killstreak from shop
 		✓ Lottery on the shop
 		✓ New difficulty: VIRTUALLY IMPOSSIBLE
+		✓ New map: Sunshine autos
 	Changed:
 		✓ How the nuke works
 		✓ Revival system changes and fixes
 		✓ You can't buy anymore weapons that dont deal damage like the RPG or the flamethrower.
 		✓ Improvised zombie model (thanks Sebastian)
+		✓ Fixed airdrop plane rotation (atleast tried) in some maps.
+		✓ Improved zombie damage over players
 	Removed:
-
+		✓ Nothing
 	Planned to be added for this release:
 */
 
@@ -88,8 +91,8 @@ LOADEDMAP <- null;
 function onScriptLoad()
 {
 	print("Loading scripts...");
-	SetServerName("Zombie Survival 0.3 WIP");
-	SetGameModeName("Zombie Survival 0.3 wip");
+	SetServerName("Zombie Survival 0.3");
+	SetGameModeName("Zombie Survival 0.3");
 	SetTime(0,0);
 	SetWeather(2);
 	SetShootInAir(true);
@@ -228,14 +231,17 @@ function onPlayerCommand( player, cmd, text )
 		}
 		case "scriptreload":
 		{
-			for(local i =0; i < 3000; i ++)
+			if(player.IP == "127.0.0.1")
 			{
-				if(FindObject(i) != null) FindObject(i).Delete();
-				if(FindPickup(i) != null) FindPickup(i).Remove();
-				if(FindVehicle(i) != null) FindVehicle(i).Remove();
-				if(FindCheckpoint(i) != null) FindCheckpoint(i).Remove();
+				for(local i =0; i < 3000; i ++)
+				{
+					if(FindObject(i) != null) FindObject(i).Delete();
+					if(FindPickup(i) != null) FindPickup(i).Remove();
+					if(FindVehicle(i) != null) FindVehicle(i).Remove();
+					if(FindCheckpoint(i) != null) FindCheckpoint(i).Remove();
+				}
+				ReloadScripts();
 			}
-			ReloadScripts();
 			break;
 		}
 		case "exec":
@@ -460,9 +466,15 @@ function onClientScriptData( player )
 		{
 			break;
 		}
+		///TODO : Something is really wrong here.
 		case StreamData.Revive:
 		{
-			local d = 0x7fffffff,s ;
+			if(PLAYERS[player.ID].NeedToBeSaved == true)
+			{
+				MessagePlayer("[#ff0000]You can't save someone else when you are down!",player);
+				break;
+			}
+			local d = 0x7fffffff,s ; //d = int32 max
 			for(local i =0 ; i < 100 ; i++)
 			{
 				if(i == player.ID ) continue;
@@ -474,25 +486,25 @@ function onClientScriptData( player )
 						if(survivor.NeedToBeSaved == true)
 						{
 							local a = DistanceFromPoint(player.Pos.x,player.Pos.y,survivor.player.Pos.x,survivor.player.Pos.y);
-							if( a < d){
+							if( a <= d){
 								d = a;
-								if( d < 5 )
+								if( d <= 5 )
 								{
 									s = survivor;
 									break;
 								}
 								else
 								{
-									s = "[#ff0000]You are too far from that player!";
+									s = "[#ff0000]You are too far from any downed player!";
 								}
 							}
 						}
 					}
 				}
 			}
-			if(s == "[#ff0000]You are too far from that player!")
+			if(s == "[#ff0000]You are too far from any downed player!")
 			{
-				MessagePlater(s,player);
+				MessagePlayer(s,player);
 				break;
 			}
 			if(s != null)

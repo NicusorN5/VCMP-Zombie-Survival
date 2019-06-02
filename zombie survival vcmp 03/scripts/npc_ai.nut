@@ -37,7 +37,8 @@ function ZNPC::Update()
 		{
 			if(this.object.World != player.World ) continue;
 			if(i == CHOPPER_PLR) continue;
-			if(::DistanceFromPoint(this.object.Pos.x,this.object.Pos.y,player.Pos.x,player.Pos.y) < NPC_FOLLOWDISTANCE);
+			local distante = ::DistanceFromPoint(this.object.Pos.x,this.object.Pos.y,player.Pos.x,player.Pos.y)
+			if(distante < NPC_FOLLOWDISTANCE);
 			{
 				if(this.object.Pos.x > player.Pos.x) this.object.Pos.x -= 0.1;
 				if(this.object.Pos.x < player.Pos.x) this.object.Pos.x += 0.1;
@@ -46,7 +47,13 @@ function ZNPC::Update()
 				if(this.object.Pos.z > player.Pos.z) this.object.Pos.z -= 0.1;
 				if(this.object.Pos.z < player.Pos.z) this.object.Pos.z += 0.1;
 				this.object.RotateToEuler(Vector(0,0,player.Angle),0);
-			}				
+			}	
+			if(distante < 2 && PLAYERS[player.ID].NeedToBeSaved == false)
+			{
+				local originalhealth = player.Health;
+				player.Health -= 1;
+				if(player.Health > originalhealth) player.Kill();
+			}			
 		}
 	}
 }
