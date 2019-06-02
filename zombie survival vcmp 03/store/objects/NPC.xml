@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objectlist>
+	<object id ="1">
+		<flags value ="0"/>
+		<texture path="zombie.txd"/>
+		<collision type="autogenerate"/>
+		<model path="tigan.dff" distance="299"/>
+	</object>
+</objectlist>
