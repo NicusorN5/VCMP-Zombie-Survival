@@ -85,7 +85,7 @@ function Survivor::Update()
 	if(this.NeedToBeSaved)
 	{
 		this.player.Health -= 1;
-		if(this.player.Spawned)
+		if(this.player.Spawned && player.Health != 0)
 		{
 			if(this.player.Health > oldHealth)
 			{
@@ -115,13 +115,16 @@ function Survivor::Update()
 	{
 		if(::DistanceFromPoint(this.player.Pos.x,this.player.Pos.y,::LOADEDMAP.pos.x,::LOADEDMAP.pos.y) > ::LOADEDMAP.distance)
 		{
-			::Announce("~o~GET BACK TO THE FIGHTNING ZONE COMRADE!",this.player,0);
-			this.player.Health -= 5;
-			if(this.FastHealthRegen) this.player.Health -= 4;
-			if(this.player.Health > oldHealth)
+			if(this.player.Spawned == true)
 			{
-				player.Kill();
-				::Message("[#ff0000]"+player+" is a traitor. He didn't got back to the fighting zone.");
+				::Announce("~o~GET BACK TO THE FIGHTNING ZONE COMRADE!",this.player,0);
+				this.player.Health -= 5;
+				if(this.FastHealthRegen) this.player.Health -= 4;
+				if(this.player.Health > oldHealth)
+				{
+					player.Kill();
+					::Message("[#ff0000]"+player+" is a traitor. He didn't got back to the fighting zone.");
+				}
 			}
 		}
 		else if(ZOMBIE_IMMUNITY >0 )
@@ -311,7 +314,7 @@ function GetKillStreakReward(plr)
 		{
 			::AnnounceAll("Player "+plr+" used ~b~Nuke");
 			::Message(GREEN+"Player "+plr+" used Nuke");
-			ZOMBIE_NUKE_TIMER = 10;
+			ZOMBIE_NUKE_TIMER = 11;
 			//plr.Score = 0;
 			break;
 		}
@@ -474,7 +477,12 @@ function UpdateS()
 	if(ZOMBIE_NUKE_TIMER >0)
 	{
 		ZOMBIE_NUKE_TIMER -= 1;
+		PlaySoundAll(50003);
 		Message("[#ff0000]Nuke incoming in:"+ZOMBIE_NUKE_TIMER);
+		if(ZOMBIE_NUKE_TIMER == 3)
+		{
+			SetGamespeed(0.25);
+		}
 		if(ZOMBIE_NUKE_TIMER == 0)
 		{
 			KillAllZombies();
@@ -494,6 +502,10 @@ function UpdateS()
 	}
 	if(ZOMBIE_NUKE_TIMER < -1)
 	{
+		if(ZOMBIE_NUKE_TIMER == -30)
+		{
+			SetGamespeed(1);
+		}
 		ZOMBIE_NUKE_TIMER += 1;
 		if(ZOMBIE_NUKE_TIMER == -1)
 		{
@@ -828,6 +840,16 @@ function StartWave()
 		}
 	}
 	AnnounceAll("~o~Wave "+ZOMBIE_WAVE,3);
+}
+function PlaySoundAll(sound)
+{
+	for(local i =0 ; i < 100;i++)
+	{
+		if(FindPlayer(i) != null)
+		{
+			FindPlayer(i).PlaySound(sound);
+		}
+	}
 }
 function ZS_Lost()
 {

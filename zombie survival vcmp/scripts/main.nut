@@ -22,15 +22,15 @@
 		✓ Lottery on the shop
 		✓ New difficulty: VIRTUALLY IMPOSSIBLE
 		✓ New map: Sunshine autos
-		-- Nuke Sound effects
-		-- Zombie Sound effects
+		✓ Nuke Sound effect
+		✓ Zombie Sound effects
 	Changed:
 		✓ How the nuke works
 		✓ Revival system changes and fixes
 		✓ You can't buy anymore weapons that dont deal damage like the RPG or the flamethrower.
 		✓ Improvised zombie model (thanks Sebastian)
 		✓ Fixed airdrop plane rotation (atleast tried) in some maps.
-		✓ Improved zombie damage over players
+		✓ Improved zombie damage to players
 	Removed:
 		✓ Nothing
 	Planned to be added for this release:

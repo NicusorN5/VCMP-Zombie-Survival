@@ -47,6 +47,8 @@ function ZNPC::Update()
 				if(this.object.Pos.z > player.Pos.z) this.object.Pos.z -= 0.1;
 				if(this.object.Pos.z < player.Pos.z) this.object.Pos.z += 0.1;
 				this.object.RotateToEuler(Vector(0,0,player.Angle),0);
+				local r = rand () % 100;
+				if(r == 0) ::PlaySound( ZOMBIE_WORLD, 50001, this.object.Pos );
 			}	
 			if(distante < 2 && PLAYERS[player.ID].NeedToBeSaved == false)
 			{
@@ -63,6 +65,10 @@ function ZNPC::Kill(killer)
 	if(rng == 5)
 	{
 		if(ZOMBIE_INTERMISSION <= 0) ::CreatePickup(383,ZOMBIE_WORLD,1,this.object.Pos,255,true);
+	}
+	if(this.object.World ==  ZOMBIE_WORLD)
+	{
+		::PlaySound( ZOMBIE_WORLD, 50002, this.object.Pos );
 	}
 	if(::ZOMBIEDEATHEX == true)::CreateExplosion(this.object.World,1,this.object.Pos,-1,false);
 	this.object.Pos = GetSpawnPos();
@@ -90,6 +96,7 @@ function ZNPC::Damage(player,weapon)
 function ZNPC::Hurt(player)
 {
 	player.Health -= this.damage;
+	::PlaySound( ZOMBIE_WORLD, 50001, this.object.Pos );
 }
 
 
