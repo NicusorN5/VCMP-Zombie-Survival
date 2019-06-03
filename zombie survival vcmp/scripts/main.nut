@@ -22,6 +22,8 @@
 		✓ Lottery on the shop
 		✓ New difficulty: VIRTUALLY IMPOSSIBLE
 		✓ New map: Sunshine autos
+		-- Nuke Sound effects
+		-- Zombie Sound effects
 	Changed:
 		✓ How the nuke works
 		✓ Revival system changes and fixes
