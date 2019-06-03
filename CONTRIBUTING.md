@@ -7,4 +7,4 @@ Contributing Rules:
 2.) **KEEP YOUR CODE CLEAN**: Use Tab for identation, keep the variable names easy to understand, etc.
 
 
-3.) **DO NOT CODE USELESS SYSTEMS FOR THIS SERVER**: The gameplay should be the same, no DM, no RPG, no registreation system, etc. If you really want a system create a issue.
+3.) **DO NOT CODE USELESS SYSTEMS FOR THIS SERVER**: The gameplay should be the same, no DM, no RPG, no registration system, etc. If you really want a system create an issue.
