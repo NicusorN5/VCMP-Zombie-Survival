@@ -1,6 +1,6 @@
 PREDATOR_PLR <- -1;
 PREDATOR_OBJ <- -1;
-MisslePos <- Vector(0,0,0);
+MissilePos <- Vector(0,0,0);
 PREDATOR_WAIT_LIST <- array(100,false);
 
 function PredatorEnter(plr)
@@ -17,13 +17,13 @@ function PredatorEnter(plr)
 	}
 	PREDATOR_PLR = plr.ID;
 	PREDATOR_WAIT_LIST[plr.ID] = true;
-	//Create Missle
-	MisslePos = LOADEDMAP.AirDrop + Vector(0,0,100);
-	local Missle = ::CreateObject(273,ZOMBIE_WORLD,MisslePos,255);
-	PREDATOR_OBJ = Missle.ID;
-	Missle.RotateToEuler(Vector(0,3.1415926/2,0),0);
+	//Create Missile
+	MissilePos = LOADEDMAP.AirDrop + Vector(0,0,100);
+	local Missile = ::CreateObject(273,ZOMBIE_WORLD,MissilePos,255);
+	PREDATOR_OBJ = Missile.ID;
+	Missile.RotateToEuler(Vector(0,3.1415926/2,0),0);
 	//Edit camera.
-	plr.SetCameraPos(MisslePos+ Vector(0,0,10), MisslePos);
+	plr.SetCameraPos(MissilePos+ Vector(0,0,10), MissilePos);
 	plr.WhiteScanlines = true;
 }
 
@@ -31,10 +31,10 @@ function PredatorUpdate()
 {
 	if(PREDATOR_PLR == -1) return;
 	local plr = FindPlayer(PREDATOR_PLR);
-	MisslePos.z -= 1;
-	FindObject(PREDATOR_OBJ).Pos = MisslePos;
-	plr.SetCameraPos(MisslePos+ Vector(0,0,10), MisslePos);
-	if((MisslePos.z - LOADEDMAP.AirDrop.z ) <= 2)
+	MissilePos.z -= 1;
+	FindObject(PREDATOR_OBJ).Pos = MissilePos;
+	plr.SetCameraPos(MissilePos+ Vector(0,0,10), MissilePos);
+	if((MissilePos.z - LOADEDMAP.AirDrop.z ) <= 2)
 	{
 		PredatorDetonate();
 	}
@@ -47,11 +47,11 @@ function PredatorDetonate()
 	plr.RestoreCamera();
 	plr.Pos = LOADEDMAP.pos; //teleport to spawn
 	//Create predator explosion and kill zombies.
-	::CreateExplosion(ZOMBIE_WORLD,2,MisslePos,-1,false);
+	::CreateExplosion(ZOMBIE_WORLD,2,MissilePos,-1,false);
 	for(local i =0 ; i < 20;i++)
 	{
 		local victim = ZOMBIES[i];
-		if(DistanceFromPoint(victim.object.Pos.x,victim.object.Pos.y,MisslePos.x,MisslePos.y) <= 30)
+		if(DistanceFromPoint(victim.object.Pos.x,victim.object.Pos.y,MissilePos.x,MissilePos.y) <= 30)
 		{
 			if(victim.object.World == ZOMBIE_WORLD)
 			{
