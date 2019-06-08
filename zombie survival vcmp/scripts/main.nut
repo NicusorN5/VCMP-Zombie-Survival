@@ -45,7 +45,7 @@ dofile("scripts/npc_ai.nut",true); //zombie `ai`
 dofile("scripts/levels.nut",true); //arenas
 dofile("scripts/zombie.nut",true); //gamemode itself
 dofile("scripts/hunter-chopper.nut",true); //chopper gunner killstreak
-dofile("scripts/predator-missle.nut",true); //predator missile killstreak
+dofile("scripts/predator-missile.nut",true); //predator missile killstreak
 dofile("scripts/reaper-agm.nut",true); //reaper uav killstreak
 
 enum StreamData
@@ -519,7 +519,7 @@ function onClientScriptData( player )
 		{
 			if(REAPER_PLR == player.ID)
 			{
-				REAPERMisslePos.y += 1;
+				REAPERMissilePos.y += 1;
 			}
 			break;
 		}
@@ -527,7 +527,7 @@ function onClientScriptData( player )
 		{
 			if(REAPER_PLR == player.ID)
 			{
-				REAPERMisslePos.y -= 1;
+				REAPERMissilePos.y -= 1;
 			}
 			break;
 		}
@@ -535,7 +535,7 @@ function onClientScriptData( player )
 		{
 			if(REAPER_PLR == player.ID)
 			{
-				REAPERMisslePos.x += 1;
+				REAPERMissilePos.x += 1;
 			}
 			break;
 		}
@@ -543,7 +543,7 @@ function onClientScriptData( player )
 		{
 			if(REAPER_PLR == player.ID)
 			{
-				REAPERMisslePos.x -= 1;
+				REAPERMissilePos.x -= 1;
 			}
 			break;
 		}
