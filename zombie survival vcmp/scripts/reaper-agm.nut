@@ -3,7 +3,7 @@
 
 REAPER_PLR <- -1;
 REAPER_ROCKET_OBJ <- -1;
-REAPERMisslePos <- Vector(0,0,0);
+REAPERMissilePos <- Vector(0,0,0);
 REAPER_WAIT_LIST <- array(100,false);
 REAPER_Ammo <- 0;
 function REAPEREnter(plr)
@@ -22,12 +22,12 @@ function REAPEREnter(plr)
 	REAPER_PLR = plr.ID;
 	REAPER_WAIT_LIST[plr.ID] = true;
 	//Create Missile
-	REAPERMisslePos = LOADEDMAP.AirDrop + Vector(0,0,100);
-	local Missle = ::CreateObject(273,ZOMBIE_WORLD,REAPERMisslePos,255);
-	REAPER_ROCKET_OBJ = Missle.ID;
-	Missle.RotateToEuler(Vector(0,3.1415926/2,0),0);
+	REAPERMissilePos = LOADEDMAP.AirDrop + Vector(0,0,100);
+	local Missile = ::CreateObject(273,ZOMBIE_WORLD,REAPERMissilePos,255);
+	REAPER_ROCKET_OBJ = Missile.ID;
+	Missile.RotateToEuler(Vector(0,3.1415926/2,0),0);
 	//Edit camera.
-	plr.SetCameraPos(REAPERMisslePos+ Vector(0,0,10), REAPERMisslePos);
+	plr.SetCameraPos(REAPERMissilePos+ Vector(0,0,10), REAPERMissilePos);
 	plr.WhiteScanlines = true;
 }
 
@@ -35,10 +35,10 @@ function REAPERUpdate()
 {
 	if(REAPER_PLR == -1) return;
 	local plr = FindPlayer(REAPER_PLR);
-	REAPERMisslePos.z -= 1;
-	FindObject(REAPER_ROCKET_OBJ).Pos = REAPERMisslePos;
-	plr.SetCameraPos(REAPERMisslePos+ Vector(0,0,10), REAPERMisslePos);
-	if((REAPERMisslePos.z - LOADEDMAP.AirDrop.z ) <= 2)
+	REAPERMissilePos.z -= 1;
+	FindObject(REAPER_ROCKET_OBJ).Pos = REAPERMissilePos;
+	plr.SetCameraPos(REAPERMissilePos+ Vector(0,0,10), REAPERMissilePos);
+	if((REAPERMissilePos.z - LOADEDMAP.AirDrop.z ) <= 2)
 	{
 		REAPERDetonate();
 	}
@@ -47,11 +47,11 @@ function REAPERDetonate()
 {
 	//Create Reaper Missile explosion and kill zombies.
 	local plr = FindPlayer(REAPER_PLR);
-	::CreateExplosion(ZOMBIE_WORLD,2,REAPERMisslePos,-1,false);
+	::CreateExplosion(ZOMBIE_WORLD,2,REAPERMissilePos,-1,false);
 	for(local i =0 ; i < 20;i++)
 	{
 		local victim = ZOMBIES[i];
-		if(DistanceFromPoint(victim.object.Pos.x,victim.object.Pos.y,REAPERMisslePos.x,REAPERMisslePos.y) <= 20)
+		if(DistanceFromPoint(victim.object.Pos.x,victim.object.Pos.y,REAPERMissilePos.x,REAPERMissilePos.y) <= 20)
 		{
 			if(victim.object.World == ZOMBIE_WORLD)
 			{
