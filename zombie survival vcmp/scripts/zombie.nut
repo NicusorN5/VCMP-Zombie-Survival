@@ -27,7 +27,8 @@ enum StreamData
 	ButtonUp = 6,
 	ButtonDown = 7,
 	ButtonLeft = 8,
-	ButtonRight = 9
+	ButtonRight = 9,
+	Hit = 10
 }
 
 enum Perks
@@ -351,7 +352,7 @@ function UpdateS()
 	if(ZOMBIE_DEBUG == true) return;
 	if(ZOMBIE_PAUSE > 0 )
 	{
-		Message("[#ffffff]New round starting in:"+ZOMBIE_PAUSE);
+		Message("[#ffffff]New match starting in:"+ZOMBIE_PAUSE);
 		ZOMBIE_PAUSE -= 1;
 		return;
 	}

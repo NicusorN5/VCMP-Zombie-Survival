@@ -22,11 +22,14 @@
 ::sX <- GUI.GetScreenSize().X;
 ::sY <- GUI.GetScreenSize().Y;
 
-UP_KEY <- KeyBind(0x26);
-DOWN_KEY <- KeyBind(0x28);
-LEFT_KEY <- KeyBind(0x25);
-RIGHT_KEY <- KeyBind(0x27);
+::UP_KEY <- KeyBind(0x26);
+::DOWN_KEY <- KeyBind(0x28);
+::LEFT_KEY <- KeyBind(0x25);
+::RIGHT_KEY <- KeyBind(0x27);
 
+::HITMARKER <- GUISprite("Hitmarker.png",VectorScreen((::sX * 0.53) - 16,(::sY * 0.4) - 16));
+::HITMARKER.Size = VectorScreen(32,32);
+::HITMARKER.Alpha = 0;
 
 ::REVIVE_KEY <- KeyBind(0x52);
 enum Perks
@@ -52,7 +55,8 @@ enum StreamData
 	ButtonUp = 6,
 	ButtonDown = 7,
 	ButtonLeft = 8,
-	ButtonRight = 9
+	ButtonRight = 9,
+	Hit = 10
 }
 
 function GetPerkImage(perk)
@@ -79,6 +83,10 @@ function Script::ScriptLoad()
 
 function Script::ScriptProcess()
 {
+	local dec = ::HITMARKER.Alpha 
+	if(dec > 0) dec -= 3;
+	if(dec < 0) dec = 0;
+	::HITMARKER.Alpha = dec;
 }
 
 function Player::PlayerShoot( player, weapon, hitEntity, hitPosition )
@@ -159,6 +167,11 @@ function Server::ServerData( stream )
 				}
 			}
 			ShowPerks();
+			break;
+		}
+		case StreamData.Hit:
+		{
+			::HITMARKER.Alpha = 255;
 			break;
 		}
 		default:
@@ -433,23 +446,23 @@ function KeyBind::OnUp(key)
 
 function KeyBind::OnDown(key)
 {
-	if(key == REVIVE_KEY)
+	if(key == ::REVIVE_KEY)
 	{
 		SendDataToServer(StreamData.Revive,null);
 	}
-	if(key == UP_KEY)
+	if(key == ::UP_KEY)
 	{
 		SendDataToServer(StreamData.ButtonUp,null);
 	}
-	if(key == DOWN_KEY)
+	if(key == ::DOWN_KEY)
 	{
 		SendDataToServer(StreamData.ButtonDown,null);
 	}
-	if(key == LEFT_KEY)
+	if(key == ::LEFT_KEY)
 	{
 		SendDataToServer(StreamData.ButtonLeft,null);
 	}
-	if(key == RIGHT_KEY)
+	if(key == ::RIGHT_KEY)
 	{
 		SendDataToServer(StreamData.ButtonRight,null);
 	}

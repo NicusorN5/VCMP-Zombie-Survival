@@ -24,6 +24,7 @@
 		✓ New map: Sunshine autos
 		✓ Nuke Sound effect
 		✓ Zombie Sound effects
+		✓ Hitmarkers
 	Changed:
 		✓ How the nuke works
 		✓ Revival system changes and fixes
@@ -59,7 +60,8 @@ enum StreamData
 	ButtonUp = 6,
 	ButtonDown = 7,
 	ButtonLeft = 8,
-	ButtonRight = 9
+	ButtonRight = 9,
+	Hit = 10
 }
 
 enum Perks

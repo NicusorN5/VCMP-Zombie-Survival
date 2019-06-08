@@ -90,6 +90,7 @@ function ZNPC::Respawn()
 }
 function ZNPC::Damage(player,weapon)
 {
+	SendDataToClient(player,StreamData.Hit,null);
 	this.health -= WeaponDMG(weapon) * PLAYERS[player.ID].GetDamagePerkStatus();
 	if(this.health <= 0 ) this.Kill(player);
 }
@@ -99,6 +100,20 @@ function ZNPC::Hurt(player)
 	::PlaySound( ZOMBIE_WORLD, 50001, this.object.Pos );
 }
 
+enum StreamData
+{
+	Initialise = 0,
+	WeaponShop = 1,
+	GivePerk = 2,
+	ResetPlayer = 3,
+	RemovePerk = 4,
+	Revive = 5,
+	ButtonUp = 6,
+	ButtonDown = 7,
+	ButtonLeft = 8,
+	ButtonRight = 9,
+	Hit = 10
+}
 
 function GetNPC(objectID)
 {
@@ -144,7 +159,7 @@ function WeaponDMG(weapon)
 		if(weapon == 132) hp = 240;//m60
 		if(weapon == 133) hp = 280;//minigun
 
-	if(ZOMBIE_INSTAKILL > 0) return 2*hp;
+	if(ZOMBIE_INSTAKILL > 0) return 10*hp;
 	return hp;
 }
 function GetSpawnPos()
