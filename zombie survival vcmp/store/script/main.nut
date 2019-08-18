@@ -27,9 +27,49 @@
 ::LEFT_KEY <- KeyBind(0x25);
 ::RIGHT_KEY <- KeyBind(0x27);
 
+::K_KEY <- KeyBind(0x4B);
+
 ::HITMARKER <- GUISprite("Hitmarker.png",VectorScreen((::sX * 0.53) - 16,(::sY * 0.4) - 16));
 ::HITMARKER.Size = VectorScreen(32,32);
 ::HITMARKER.Alpha = 0;
+
+::KILLSTREAK_CENTER_S <- GUISprite("Killstreak_none.png",VectorScreen((::sX * 0.5) - 32,(::sY * 0.5) - 32));
+::KILLSTREAK_CENTER_S.Size = VectorScreen(64,64);
+::KILLSTREAK_CENTER_S.Alpha = 0;
+
+::KILLSTREAK_CENTER_T <- GUILabel(VectorScreen((::sX * 0.5) - 32,(::sY * 0.5) + 32),Colour(0,0,0),"Nothing");
+::KILLSTREAK_CENTER_T.FontSize = 20;
+::KILLSTREAK_CENTER_T.Alpha = 0;
+::KILLSTREAK_CENTER_T.TextAlignment = GUI_ALIGN_LEFT;
+
+::KILLSTREAK_ICON <- GUISprite("Killstreak_none.png",VectorScreen(::sX * 0.85,sY * 0.85));
+::KILLSTREAK_ICON.Size = VectorScreen(64,64);
+::KILLSTREAK_ICON.Alpha = 0;
+::KILLSTREAK_ICON_T <- GUILabel(VectorScreen(::sX * 0.85,(::sY * 0.85) + 65),Colour(0,0,0),"Nothing");
+::KILLSTREAK_ICON_T.FontSize = 20;
+::KILLSTREAK_ICON_T.Alpha = 0;
+::KILLSTREAK_ICON_T.TextAlignment = GUI_ALIGN_LEFT;
+
+::CurrentKillStreakSprite <- "Killstreak_none.png";
+::CurrentKillStreak <- "None";
+::KillStreaksA <- array(20,-1);
+
+::AnnounceKillstreak_TextPlayer <- GUILabel(VectorScreen(::sX *0.75,sY*0.5),Colour(255,0,0),"Athanatos");
+::AnnounceKillstreak_TextPlayer.FontSize = 25;
+::AnnounceKillstreak_TextPlayer.Alpha = 0;
+::AnnounceKillstreak_TextPlayer.TextAlignment = GUI_ALIGN_LEFT;
+::AnnounceKillstreak_TextStatus <- GUILabel(VectorScreen(::sX *0.75,sY*0.5 + 25),Colour(255,255,255),"Armour Airdrop Package");
+::AnnounceKillstreak_TextStatus.FontSize = 25;
+::AnnounceKillstreak_TextStatus.Alpha = 0;
+::AnnounceKillstreak_TextStatus.TextAlignment = GUI_ALIGN_LEFT;
+
+::NukeIcon <- GUISprite("Nuke.png",VectorScreen(sX*0.9,sY*0.25));
+::NukeIcon.Size = VectorScreen(128,128);
+::NukeIcon.Alpha = 0;
+
+::Osprey_Camera <- GUISprite("Osprey_Camera.png",VectorScreen(0,0));
+::Osprey_Camera.Size = VectorScreen(sX,sY);
+::Osprey_Camera.Alpha = 0;
 
 ::REVIVE_KEY <- KeyBind(0x52);
 enum Perks
@@ -56,7 +96,10 @@ enum StreamData
 	ButtonDown = 7,
 	ButtonLeft = 8,
 	ButtonRight = 9,
-	Hit = 10
+	Hit = 10,
+	Killstreak = 11,
+	AnnounceKillstreak = 12,
+	OspreyStopCamera = 13
 }
 
 function GetPerkImage(perk)
@@ -87,6 +130,17 @@ function Script::ScriptProcess()
 	if(dec > 0) dec -= 3;
 	if(dec < 0) dec = 0;
 	::HITMARKER.Alpha = dec;
+	
+	local dec2 = ::AnnounceKillstreak_TextPlayer.Alpha;
+	if(dec2 > 0 ) dec2 -= 0.25;
+	::AnnounceKillstreak_TextPlayer.Alpha = dec2;
+	::AnnounceKillstreak_TextStatus.Alpha = dec2;
+	
+	local dec3 = ::KILLSTREAK_CENTER_S.Alpha;
+	if(dec3 > 0) dec3 -= 0.5;
+	if(dec3 < 0) dec3 = 0;
+	::KILLSTREAK_CENTER_S.Alpha = dec3;
+	::KILLSTREAK_CENTER_T.Alpha = dec3;
 }
 
 function Player::PlayerShoot( player, weapon, hitEntity, hitPosition )
@@ -174,10 +228,110 @@ function Server::ServerData( stream )
 			::HITMARKER.Alpha = 255;
 			break;
 		}
+		case StreamData.Killstreak:
+		{
+			for(local i =0 ; i < 20; i++)
+			{
+				if(::KillStreaksA[i] == -1)
+				{
+					::KillStreaksA[i] = GetKillstreakID(string);
+					::CurrentKillStreak = string;
+					SetKillStreakIcon(GetKillstreakID(string));
+					::KILLSTREAK_ICON_T.Text = string;
+					::KILLSTREAK_CENTER_S.Alpha = 255;
+					::KILLSTREAK_CENTER_T.Text = string
+					::KILLSTREAK_CENTER_T.Alpha = 255;
+					::KILLSTREAK_ICON.Alpha = 255;
+					::KILLSTREAK_ICON_T.Alpha = 255;
+					break;
+				}
+			}
+			break;
+		}
+		case StreamData.AnnounceKillstreak:
+		{
+			::AnnounceKillstreak_TextStatus.Text = GetKillstreakName(GetTok(string," ",2).tointeger()) ;
+			::AnnounceKillstreak_TextStatus.Alpha = 255;
+			::AnnounceKillstreak_TextPlayer.Text = GetTok(string," ",1);
+			::AnnounceKillstreak_TextPlayer.Alpha = 255;
+			break;
+		}
+		case StreamData.OspreyStopCamera:
+		{
+			::Osprey_Camera.Alpha = 0;
+			Hud.AddFlags(HUD_FLAG_CASH | HUD_FLAG_CLOCK | HUD_FLAG_HEALTH | HUD_FLAG_WEAPON | HUD_FLAG_WANTED | HUD_FLAG_RADAR )
+			break;
+		}
 		default:
 		{
 			Console.Print(int+"");
+			break;
 		}
+	}
+}
+function GetKillstreakName(id)
+{
+	switch(id)
+	{
+		case -2: return "Destroyed Osprey Gunner";
+		case -1: return "Destroyed Chopper Gunner";
+		case 0: return "Power";
+		case 1: return "UAV Radar";
+		case 2: return "Predator Missile";
+		case 3: return "Insta Heal";
+		case 4: return "Care Package";
+		case 5: return "Armour Airdrop Package";
+		case 6: return "Ammo Package";
+		case 7: return "Chopper Gunner";
+		case 8: return "Emergency AirDrop";
+		case 9: return "Reaper";
+		case 10: return "Airstrike";
+		case 11: return "Nuke";
+		case 12: return "Osprey Gunner";
+	}
+}
+function GetKillstreakID(name)
+{
+	switch(name)
+	{
+		case "Power": return 0;
+		case "UAV Radar": return 1;
+		case "Predator Missile": return 2;
+		case "Insta Heal" : return 3;
+		case "Care Package": return 4;
+		case "Armour Airdrop Package": return 5;
+		case "Ammo Package": return  6;
+		case "Chopper Gunner": return 7;
+		case "Emergency AirDrop": return 8;
+		case "Reaper": return 9;
+		case "Airstrike": return 10;
+		case "Nuke": return 11;
+		case "Osprey Gunner" : return 12;
+	}
+}
+function SetKillStreakIcon(id)
+{
+	::KILLSTREAK_ICON.SetTexture(GetKillstreakImage(id));
+	::KILLSTREAK_CENTER_S.SetTexture(GetKillstreakImage(id));
+}
+function GetKillstreakImage(id)
+{
+	switch(id)
+	{
+		case 0 : return "Killstreak_power.png";
+		case 1 : return "Killstreak_UAV.png";
+		case 2 : return "Killstreak_Hellfire.png";
+		case 3 : return "Killstreak_Instaheal.png";
+		case 4 : return "Killstreak_CarePackage.png";
+		case 5 : return "Killstreak_ArmourPackage.png";
+		case 6 : return "Killstreak_AmmoPackage.png";
+		case 7 : return "Killstreak_HunterChopper.png";
+		case 8 : return "Killstreak_AirDrop.png";
+		case 9 : return "Killstreak_Reaper.png";
+		case 10 : return "Killstreak_Airstrike.png";
+		case 11 : return "Killstreak_Nuke.png";
+		case 12 : return "Killstreak_OspreyGunner.png"
+		default: return "Killstreak_none.png";
 	}
 }
 function ShowPerks()
@@ -466,6 +620,31 @@ function KeyBind::OnDown(key)
 	{
 		SendDataToServer(StreamData.ButtonRight,null);
 	}
+	if(key == ::K_KEY)
+	{
+		SendDataToServer(StreamData.Killstreak,null);
+		if(CurrentKillStreak == "Osprey Gunner")
+		{
+			Hud.RemoveFlags(HUD_FLAG_CASH | HUD_FLAG_CLOCK | HUD_FLAG_HEALTH | HUD_FLAG_WEAPON | HUD_FLAG_WANTED | HUD_FLAG_RADAR )
+			::Osprey_Camera.Alpha = 255;
+		}
+		for(local i = 19; i >= 0; i--)
+		{
+			if(KillStreaksA[i] != -1)
+			{
+				KillStreaksA[i] = -1;
+				if( i == 0)
+				{
+					::KILLSTREAK_ICON.Alpha = 0;
+					::KILLSTREAK_ICON_T.Alpha = 0;
+					break;
+				}
+				::KILLSTREAK_ICON.SetTexture(GetKillstreakImage(KillStreaksA[i-1]));
+				::KILLSTREAK_ICON_T.Text = GetKillstreakName(KillStreaksA[i-1]);
+				break;
+			}
+		}
+	}
 }
 function GUI::WindowClose(window)
 {
@@ -477,4 +656,17 @@ function SendDataToServer(int,string)
 	msg.WriteInt(int);
 	if(string != null) msg.WriteString(string)
 	Server.SendData(msg);
+}
+
+function GetTok(string, separator, n, ...)
+{
+	local m = vargv.len() > 0 ? vargv[0] : n,
+	tokenized = split(string, separator),
+	text = "";
+	if (n > tokenized.len() || n < 1) return null;
+	for (; n <= m; n++)
+	{
+		text += text == "" ? tokenized[n-1] : separator + tokenized[n-1];
+	}
+	return text;
 }

@@ -13,7 +13,7 @@ function AddInChopper(plr)
 		{
 			::MessagePlayer("[#FF0000]Hunter is already used!",plr);
 			CHOPPER_WAIT_LIST[i] = true;
-			return;
+			return false;
 		}
 	}
 	//put player in chopper gunner
@@ -28,6 +28,7 @@ function AddInChopper(plr)
 	CHOPPER_VEH = ::CreateVehicle(VEH_HUNTER,ZOMBIE_WORLD,(LOADEDMAP.AirDrop+Vector(0,0,40)),0,1,1).ID;
 	FindVehicle(CHOPPER_VEH).Health = 0x7fffffff;
 	//create timer duration.
+	return true;
 }
 function ChopperUpdate()
 {
@@ -78,10 +79,36 @@ function RemoveFromChopper()
 		}
 	}
 }
+function CrashChopper()
+{
+	if(CHOPPER_PLR == -1) return;
+	//reset player
+	local player = FindPlayer(CHOPPER_PLR);
+	player.GreenScanlines = false;	
+	player.SetAlpha(255,255);
+	player.Health = 100;
+	player.Pos = LOADEDMAP.AirDrop;
+	CHOPPER_WAIT_LIST[CHOPPER_PLR] = false;
+	CHOPPER_PLR = -1;
+	//reset chopper
+	FindVehicle(CHOPPER_VEH).Health = 250;
+	for(local i =0 ; i < 100;i++)
+	{
+		if(CHOPPER_WAIT_LIST[i] == true)
+		{
+			if(FindPlayer(i) != null)
+			{
+				AddInChopper(FindPlayer(i));
+			}
+			else CHOPPER_WAIT_LIST[i] = false;
+		}
+	}
+}
 function UpdateKillstreaks()
 {
 	ChopperUpdate();
 	PredatorUpdate();
 	REAPERUpdate();
+	OSPREYUpdate();
 }
 KILLSTREAK_TIMER <- NewTimer("UpdateKillstreaks",50,0); // <-- create Update function timer.

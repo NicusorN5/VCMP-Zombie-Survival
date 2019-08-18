@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objectlist>
+	<object id ="2">
+		<flags value ="0"/>
+		<texture path="osprey.txd"/>
+		<collision type="none"/>
+		<model path="osprey.dff" distance="299"/>
+	</object>
+</objectlist>

@@ -4,23 +4,12 @@
 REAPER_PLR <- -1;
 REAPER_ROCKET_OBJ <- -1;
 REAPERMissilePos <- Vector(0,0,0);
-REAPER_WAIT_LIST <- array(100,false);
 REAPER_Ammo <- 0;
 function REAPEREnter(plr)
 {
 	if(REAPER_PLR == -1) REAPER_Ammo = 2+ rand() % 20;
 	//Set player
-	for(local i =0 ; i < 100;i++)
-	{
-		if(REAPER_WAIT_LIST[i] == true)
-		{
-			::MessagePlayer("[#FF0000]Reaper AGM is already used!",plr);
-			REAPER_WAIT_LIST[i] = true;
-			return;
-		}
-	}
 	REAPER_PLR = plr.ID;
-	REAPER_WAIT_LIST[plr.ID] = true;
 	//Create Missile
 	REAPERMissilePos = LOADEDMAP.AirDrop + Vector(0,0,100);
 	local Missile = ::CreateObject(273,ZOMBIE_WORLD,REAPERMissilePos,255);
@@ -29,10 +18,15 @@ function REAPEREnter(plr)
 	//Edit camera.
 	plr.SetCameraPos(REAPERMissilePos+ Vector(0,0,10), REAPERMissilePos);
 	plr.WhiteScanlines = true;
+	return true;
 }
 
 function REAPERUpdate()
 {
+	if(FindPlayer(REAPER_PLR) == null) 
+	{
+		REAPER_PLR = -1;
+	}
 	if(REAPER_PLR == -1) return;
 	local plr = FindPlayer(REAPER_PLR);
 	REAPERMissilePos.z -= 1;
@@ -41,6 +35,29 @@ function REAPERUpdate()
 	if((REAPERMissilePos.z - LOADEDMAP.AirDrop.z ) <= 2)
 	{
 		REAPERDetonate();
+	}
+	if(CHOPPER_PLR != -1)
+	{
+		if(REAPERMissilePos.z - (LOADEDMAP.AirDrop.z+ 40) <= 2)
+		{
+			REAPERDetonate();
+			PlaySoundAllPlayers(50004);
+			CrashChopper();
+			SendDataToAllClient(StreamData.AnnounceKillstreak,plr.Name+" -1");
+		}
+	}
+	if(OSPREY_PLR != -1)
+	{
+		if(MissilePos.z - (LOADEDMAP.AirDrop.z+ 40) <= 2)
+		{
+			if(DistanceFromPoint(FindObject(OSPREY).Pos.x,FindObject(OSPREY).Pos.y,LOADEDMAP.AirDrop.x,LOADEDMAP.AirDrop.y) <= 3)
+			{
+				REAPERDetonate();
+				PlaySoundAllPlayers(50004);
+				RemoveFromOSPREY();
+				SendDataToAllClient(StreamData.AnnounceKillstreak,plr.Name+" -2");
+			}
+		}
 	}
 }
 function REAPERDetonate()
@@ -63,7 +80,6 @@ function REAPERDetonate()
 	REAPER_Ammo -= 1;
 	if(REAPER_Ammo <= 0) ReaperExit();
 	else {
-		REAPER_WAIT_LIST[plr.ID] = false;
 		REAPEREnter(FindPlayer(REAPER_PLR));
 		MessagePlayer("[#0000ff]Reaper rockets remaining:"+REAPER_Ammo,FindPlayer(REAPER_PLR));
 	}
@@ -76,18 +92,6 @@ function ReaperExit()
 	plr.Pos = LOADEDMAP.pos; //teleport to spawn
 	plr.WhiteScanlines = false;
 	plr.RestoreCamera();
-	REAPER_WAIT_LIST[plr.ID] = false;
 	REAPER_PLR = -1;
 	//reset Reaper.
-	for(local i =0 ; i < 100;i++)
-	{
-		if(REAPER_WAIT_LIST[i] == true)
-		{
-			if(FindPlayer(i) != null)
-			{
-				REAPEREnter(FindPlayer(i));
-			}
-			else REAPER_WAIT_LIST[i] = false;
-		}
-	}
 }

@@ -9,6 +9,8 @@ ZOMBIE_FROZEN <- 0;
 ZOMBIE_INSTAKILL <- 0;
 ZOMBIE_DOUBLE <- 0;
 ZOMBIE_IMMUNITY <- 0;
+ZOMBIE_SPEED <- 0.2;
+ZOMBIE_MUTED <- false;
 
 class ZNPC
 {
@@ -37,24 +39,37 @@ function ZNPC::Update()
 		{
 			if(this.object.World != player.World ) continue;
 			if(i == CHOPPER_PLR) continue;
+			if(i == OSPREY_PLR) continue;
 			local distante = ::DistanceFromPoint(this.object.Pos.x,this.object.Pos.y,player.Pos.x,player.Pos.y)
 			if(distante < NPC_FOLLOWDISTANCE);
 			{
-				if(this.object.Pos.x > player.Pos.x) this.object.Pos.x -= 0.1;
-				if(this.object.Pos.x < player.Pos.x) this.object.Pos.x += 0.1;
-				if(this.object.Pos.y > player.Pos.y) this.object.Pos.y -= 0.1;
-				if(this.object.Pos.y < player.Pos.y) this.object.Pos.y += 0.1;
-				if(this.object.Pos.z > player.Pos.z) this.object.Pos.z -= 0.1;
-				if(this.object.Pos.z < player.Pos.z) this.object.Pos.z += 0.1;
+				if(this.object.Pos.x > player.Pos.x) this.object.Pos.x -= ZOMBIE_SPEED;
+				if(this.object.Pos.x < player.Pos.x) this.object.Pos.x += ZOMBIE_SPEED;
+				if(this.object.Pos.y > player.Pos.y) this.object.Pos.y -= ZOMBIE_SPEED;
+				if(this.object.Pos.y < player.Pos.y) this.object.Pos.y += ZOMBIE_SPEED;
+				if(this.object.Pos.z > player.Pos.z) this.object.Pos.z -= ZOMBIE_SPEED;
+				if(this.object.Pos.z < player.Pos.z) this.object.Pos.z += ZOMBIE_SPEED;
 				this.object.RotateToEuler(Vector(0,0,player.Angle),0);
 				local r = rand () % 100;
-				if(r == 0) ::PlaySound( ZOMBIE_WORLD, 50001, this.object.Pos );
+				if(r == 0)
+				{
+					if(!ZOMBIE_MUTED) ::PlaySound( ZOMBIE_WORLD, 50001, this.object.Pos );
+				}
 			}	
 			if(distante < 2 && PLAYERS[player.ID].NeedToBeSaved == false)
 			{
-				local originalhealth = player.Health;
-				player.Health -= 1;
-				if(player.Health > originalhealth) player.Kill();
+				if(player.Armour > 0)
+				{
+					local originalarmour = player.Armour;
+					player.Armour -= 1;
+					if(player.Armour > originalarmour) player.Health -= 10;
+				}
+				else
+				{
+					local originalhealth = player.Health;
+					player.Health -= 1;
+					if(player.Health > originalhealth) player.Kill();
+				}
 			}			
 		}
 	}
@@ -68,7 +83,7 @@ function ZNPC::Kill(killer)
 	}
 	if(this.object.World ==  ZOMBIE_WORLD)
 	{
-		::PlaySound( ZOMBIE_WORLD, 50002, this.object.Pos );
+		if(!ZOMBIE_MUTED) ::PlaySound( ZOMBIE_WORLD, 50002, this.object.Pos );
 	}
 	if(::ZOMBIEDEATHEX == true)::CreateExplosion(this.object.World,1,this.object.Pos,-1,false);
 	this.object.Pos = GetSpawnPos();

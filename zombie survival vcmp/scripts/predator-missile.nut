@@ -1,22 +1,11 @@
 PREDATOR_PLR <- -1;
 PREDATOR_OBJ <- -1;
 MissilePos <- Vector(0,0,0);
-PREDATOR_WAIT_LIST <- array(100,false);
 
 function PredatorEnter(plr)
 {
 	//Set player
-	for(local i =0 ; i < 100;i++)
-	{
-		if(PREDATOR_WAIT_LIST[i] == true)
-		{
-			::MessagePlayer("[#FF0000]Predator UAV is already used!",plr);
-			PREDATOR_WAIT_LIST[i] = true;
-			return;
-		}
-	}
 	PREDATOR_PLR = plr.ID;
-	PREDATOR_WAIT_LIST[plr.ID] = true;
 	//Create Missile
 	MissilePos = LOADEDMAP.AirDrop + Vector(0,0,100);
 	local Missile = ::CreateObject(273,ZOMBIE_WORLD,MissilePos,255);
@@ -25,6 +14,7 @@ function PredatorEnter(plr)
 	//Edit camera.
 	plr.SetCameraPos(MissilePos+ Vector(0,0,10), MissilePos);
 	plr.WhiteScanlines = true;
+	return true;
 }
 
 function PredatorUpdate()
@@ -37,6 +27,29 @@ function PredatorUpdate()
 	if((MissilePos.z - LOADEDMAP.AirDrop.z ) <= 2)
 	{
 		PredatorDetonate();
+	}
+	if(CHOPPER_PLR != -1)
+	{
+		if(MissilePos.z - (LOADEDMAP.AirDrop.z+ 40) <= 2)
+		{
+			PredatorDetonate();
+			CrashChopper();
+			PlaySoundAllPlayers(50004);
+			SendDataToAllClient(StreamData.AnnounceKillstreak,plr.Name+" -1");
+		}
+	}
+	if(OSPREY_PLR != -1)
+	{
+		if(MissilePos.z - (LOADEDMAP.AirDrop.z+ 40) <= 2)
+		{
+			if(DistanceFromPoint(FindObject(OSPREY).Pos.x,FindObject(OSPREY).Pos.y,LOADEDMAP.AirDrop.x,LOADEDMAP.AirDrop.y) <= 3)
+			{
+				PredatorDetonate();
+				RemoveFromOSPREY();
+				PlaySoundAllPlayers(50004);
+				SendDataToAllClient(StreamData.AnnounceKillstreak,plr.Name+" -2");
+			}
+		}
 	}
 }
 function PredatorDetonate()
@@ -62,16 +75,4 @@ function PredatorDetonate()
 	//reset predator.
 	PREDATOR_PLR = -1;
 	FindObject(PREDATOR_OBJ).Delete();
-	PREDATOR_WAIT_LIST[plr.ID] = false;
-	for(local i =0 ; i < 100;i++)
-	{
-		if(PREDATOR_WAIT_LIST[i] == true)
-		{
-			if(FindPlayer(i) != null)
-			{
-				PredatorEnter(FindPlayer(i));
-			}
-			else PREDATOR_WAIT_LIST[i] = false;
-		}
-	}
 }

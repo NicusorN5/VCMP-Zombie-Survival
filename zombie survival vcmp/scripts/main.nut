@@ -1,9 +1,9 @@
 /*
 
-			ZOMBIE SURVIVAL 0.3
+			ZOMBIE SURVIVAL 0.4
 							by Athanatos
 	
-	Update for Zombie Survival 0.2. See the changelog...
+	Update for Zombie Survival 0.4. See the changelog...
 	
 	
 	
@@ -14,24 +14,13 @@
 	'X' <- (not added)
 	
 	Added:
-		✓ Radar Killstreak [25 Kills]
-		✓ All avalable weapons are upgradeable [10k to upgrade a weapon]
-		✓ Killstreak bonuses in airdrops
-		✓ Buy ammo from shop
-		✓ Buy killstreak from shop
-		✓ Lottery on the shop
-		✓ New difficulty: VIRTUALLY IMPOSSIBLE
-		✓ New map: Sunshine autos
-		✓ Nuke Sound effect
-		✓ Zombie Sound effects
-		✓ Hitmarkers
+		✓ Killstreak Icons
+		✓ Killstreak UI announce
+		✓ New killstreak: Osprey Gunner
 	Changed:
-		✓ How the nuke works
-		✓ Revival system changes and fixes
-		✓ You can't buy anymore weapons that dont deal damage like the RPG or the flamethrower.
-		✓ Improvised zombie model (thanks Sebastian)
-		✓ Fixed airdrop plane rotation (atleast tried) in some maps.
-		✓ Improved zombie damage to players
+		✓ How killstreaks generally work
+		✓ Fixed some player resetting issues when starting a new round
+		✓ Armour is now more usefull
 	Removed:
 		✓ Nothing
 	Planned to be added for this release:
@@ -48,6 +37,8 @@ dofile("scripts/zombie.nut",true); //gamemode itself
 dofile("scripts/hunter-chopper.nut",true); //chopper gunner killstreak
 dofile("scripts/predator-missile.nut",true); //predator missile killstreak
 dofile("scripts/reaper-agm.nut",true); //reaper uav killstreak
+dofile("scripts/osprey-gunner.nut",true); //reaper uav killstreak
+dofile("scripts/Killstreak.nut",true); //Killstreak functions
 
 enum StreamData
 {
@@ -61,7 +52,10 @@ enum StreamData
 	ButtonDown = 7,
 	ButtonLeft = 8,
 	ButtonRight = 9,
-	Hit = 10
+	Hit = 10,
+	Killstreak = 11,
+	AnnounceKillstreak = 12
+	OspreyStopCamera = 13
 }
 
 enum Perks
@@ -95,19 +89,20 @@ LOADEDMAP <- null;
 function onScriptLoad()
 {
 	print("Loading scripts...");
-	SetServerName("Zombie Survival 0.3");
-	SetGameModeName("Zombie Survival 0.3");
+	SetServerName("Zombie Survival 0.4");
+	SetGameModeName("Zombie Survival 0.4");
 	SetTime(0,0);
 	SetWeather(2);
 	SetShootInAir(true);
+	SetFriendlyFire(true);
 	PLANEID <- CreateObject(638,ZOMBIE_WORLD,Vector(0,0,0),255).ID;
 	for(local i =0; i < MAX_NPCS;i++)
 	{
 		ZOMBIES[i] = ZNPC("Zombie",100,25);
 	}
 	print("<=====================================>");
-	print("VC:MP Zombie Survival 0.3 by Athanatos");
-	print("<== GOLDEN WEAPONS UPDATE ==>");
+	print("VC:MP Zombie Survival 0.4 by Athanatos");
+	print("<== KILLSTREAK SYSTEM UPDATE ==>");
 	print("<=====================================>");
 	print("Scripts Loaded Successfully!");
 	print("You are free to modify, publish and host this server how much you want, BUT please keep a little credit to me(Athanatos)");
@@ -119,7 +114,7 @@ function onScriptUnload()
 
 function onPlayerJoin( player )
 {
-	MessagePlayer(GREEN+"Welcome "+RED+player+GREEN+" to "+BLUE+"Zombie Survival 0.2",player);
+	MessagePlayer(GREEN+"Welcome "+RED+player+GREEN+" to "+BLUE+"Zombie Survival 0.4",player);
 }
 
 function onPlayerPart( player, reason )
@@ -159,6 +154,9 @@ function onPlayerSpawn( player )
 		player.GiveWeapon(ZOMBIEDEFAULTWEAPONTHREE,ZOMBIEDEFAULTWEAPONTHREEAMMO);
 		player.Cash = 500;
 		player.Skin = rand() % 160;
+		player.Score = 0;
+		player.Health = 100;
+		player.Armour = 0;
 	}
 }
 
@@ -549,6 +547,11 @@ function onClientScriptData( player )
 			}
 			break;
 		}
+		case StreamData.Killstreak:
+		{
+			PLAYERS[player.ID].UseKillstreak();
+			break;
+		}
 	}
 }
 function GetTok(string, separator, n, ...)
@@ -581,6 +584,10 @@ function onPlayerExitVehicle( player, vehicle )
 
 function onVehicleExplode( vehicle )
 {
+	if( vehicle.ID == CHOPPER_VEH)
+	{
+		vehicle.Delete();
+	}
 }
 
 function onVehicleRespawn( vehicle )
@@ -618,30 +625,36 @@ function onPickupPickedUp( player, pickup )
 		if(pickperk == 0)
 		{
 			player.GiveWeapon(33,100);
+			Announce("Minigun",player,0);
 		}
 		if(pickperk == 1)
 		{
 			ZOMBIE_DOUBLE += 30;
 			SendDataToAllClient(StreamData.GivePerk,Perks.DoubleScore+"");
+			AnnounceAll("Double score",0);
 		}
 		if(pickperk == 2)
 		{
 			ZOMBIE_FROZEN += 30;
 			SendDataToAllClient(StreamData.GivePerk,Perks.Freeze+"");
+			AnnounceAll("Freezer",0);
 		}
 		if(pickperk == 3)
 		{
 			ZOMBIE_INSTAKILL += 30;
 			SendDataToAllClient(StreamData.GivePerk,Perks.InstaKill+"");
+			AnnounceAll("InstaKill",0);
 		}
 		if(pickperk == 4)
 		{
 			ZOMBIE_IMMUNITY += 30;
 			SendDataToAllClient(StreamData.GivePerk,Perks.Immunity+"");
+			AnnounceAll("Invincibility",0);
 		}
 		if(pickperk == 5)
 		{
 			player.Cash += 500;
+			Announce("Extra cash!",player,0);
 		}
 		if(pickperk == 6)
 		{
@@ -652,7 +665,11 @@ function onPickupPickedUp( player, pickup )
 	if(pickup.Model >= 274 && pickup.Model <= 290) pickup.Remove();
 	if(pickup.Model == 368)
 	{
-		player.Armour = 200;
+		local arm = player.Armour;
+		arm += 50;
+		if(arm > 250) arm = 250;
+		player.Armour = arm;
+		
 		local r = rand() % 10;
 		if(r == 0) pickup.Remove();
 	}
@@ -740,6 +757,18 @@ function SendDataToAllClient(int,string)
 		if(FindPlayer(i) != null)
 		{
 			SendDataToClient(FindPlayer(i),int,string);
+		}
+	}
+}
+function PlaySoundAllPlayers(sound)
+{
+	for(local i =0 ; i < 100;i++)
+	{
+		if(FindPlayer(i) != null) {
+			FindPlayer(i).PlaySound(sound);
+			FindPlayer(i).PlaySound(sound);
+			FindPlayer(i).PlaySound(sound);
+		    FindPlayer(i).PlaySound(sound);
 		}
 	}
 }

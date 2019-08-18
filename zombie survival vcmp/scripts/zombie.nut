@@ -4,6 +4,7 @@ class Survivor
 	constructor(cplayer)
 	{
 		player = cplayer;
+		Killstreaks = array(20,-1);
 	}
 	player = null;
 	FastHealthRegen = false;
@@ -15,6 +16,8 @@ class Survivor
 	DamagePerk = false;
 	FastReviveCounter = 0;
 	PlayingInKillStreak = 0;
+	Killstreaks = array(20,-1);
+	Killed = false;
 }
 enum StreamData
 {
@@ -28,7 +31,10 @@ enum StreamData
 	ButtonDown = 7,
 	ButtonLeft = 8,
 	ButtonRight = 9,
-	Hit = 10
+	Hit = 10,
+	Killstreak = 11,
+	AnnounceKillstreak = 12
+	OspreyStopCamera = 13
 }
 
 enum Perks
@@ -171,7 +177,29 @@ function Survivor::GivePerk(Perk)
 	}
 	::SendDataToClient(this.player,StreamData.GivePerk,Perk+"");
 }
-
+function Survivor::AddKillstreak(killstreak)
+{
+	for(local i =0 ; i < 20;i++)
+	{
+		if(this.Killstreaks[i] == -1)
+		{
+			this.Killstreaks[i] = killstreak;
+			break;
+		}
+	}
+}
+function Survivor::UseKillstreak()
+{
+	for(local i = 19; i >= 0 ; i--)
+	{
+		if(this.Killstreaks[i] != -1)
+		{
+			::UseKillstreak(this.player,GetKillstreakName(this.Killstreaks[i]));
+			this.Killstreaks[i] = -1;
+			break;
+		}
+	}
+}
 
 function CPlayer::Kill()
 {
@@ -187,7 +215,7 @@ function CPlayer::SpectateServer(initial)
 		{
 			if(FindPlayer(i) != null)
 			{
-				this.SpectateTarger = FindPlayer(i);
+				this.SpectateTarget = FindPlayer(i);
 				::Announce("Use [SPACE] to spectate next player",player,0);
 			}
 		}
@@ -206,120 +234,107 @@ ZOMBIE_NUKE_TIMER <- -1;
 
 function GetKillStreakReward(plr)
 {
+	local a = false;
 	switch(plr.Score)
 	{
 		case 10:
 		{
-			::Message(GREEN+"Player "+plr+" used Power!");
-			::Message(WHITE+"Shop online!");
-			::AnnounceAll("Player "+plr+" used ~b~Power!",3);
-			::ZOMBIE_POWER = true;
-			break;
+				SendDataToClient(plr,StreamData.Killstreak,GetKillstreakName(0));
+				PLAYERS[plr.ID].AddKillstreak(0);
+				a =  true;
+				break;
 		}
 		case 25:
 		{
-			::Message(GREEN+"Player "+plr+" used UAV Radar!");
-			::AnnounceAll("Player "+plr+" used ~b~UAV Radar!",3);
-			::ZOMBIE_UAV += 120;
-			break;
+				SendDataToClient(plr,StreamData.Killstreak,GetKillstreakName(1));
+				PLAYERS[plr.ID].AddKillstreak(1);
+				a =  true;
+				break;
 		}
 		case 50:
 		{
-			::AnnounceAll("Player "+plr+" used ~b~Predator Missile!",3);
-			::Message(GREEN+"Player "+plr+" used Predator Missile");
-			PredatorEnter(plr);
-			break;
+				SendDataToClient(plr,StreamData.Killstreak,GetKillstreakName(2));
+				PLAYERS[plr.ID].AddKillstreak(2);
+				a =  true;
+				break;
 		}
 		case 75:
 		{
-			::AnnounceAll("Player "+plr+" used ~b~Insta Heal!",3);
-			::Message(GREEN+"Player "+plr+" used Insta Heal");
-			for(local i =0 ; i < 100;i++)
-			{
-				if(FindPlayer(i) != null)
-				{
-					FindPlayer(i).Health = PLAYERS[i].MaxHP;
-				}
-			}
-			break;
+				SendDataToClient(plr,StreamData.Killstreak,GetKillstreakName(3));
+				PLAYERS[plr.ID].AddKillstreak(3);
+				a =  true;
+				break;			
 		}
 		case 100:
 		{
-			::AnnounceAll("Player "+plr+" used ~b~Care Package!",3);
-			::Message(GREEN+"Player "+plr+" used Care Package");
-			::FindObject(PLANEID).Pos = ::LOADEDMAP.AirDropPlanePoint1;
-			::FindObject(PLANEID).RotateToEuler(Vector(0.0,0.0,::LOADEDMAP.AirDropAngle),0);
-			::FindObject(PLANEID).MoveTo(::LOADEDMAP.AirDropPlanePoint2,10000);
-			::CreateAirDropPickup(1);
-			break;
+				SendDataToClient(plr,StreamData.Killstreak,GetKillstreakName(4));
+				PLAYERS[plr.ID].AddKillstreak(4);
+				a =  true;
+				break;
 		}
 		case 150:
 		{
-			::AnnounceAll("Player "+plr+" used ~b~Armour Package!",3);
-			::Message(GREEN+"Player "+plr+" used Armour Airdrop Package");
-			::FindObject(PLANEID).Pos = ::LOADEDMAP.AirDropPlanePoint1;
-			::FindObject(PLANEID).RotateToEuler(Vector(0.0,0.0,::LOADEDMAP.AirDropAngle),0);
-			::FindObject(PLANEID).MoveTo(::LOADEDMAP.AirDropPlanePoint2,10000);
-			::CreatePickup(368,ZOMBIE_WORLD,1+ rand() % 20 ,::LOADEDMAP.AirDrop,255,true);
-			break;
+				SendDataToClient(plr,StreamData.Killstreak,GetKillstreakName(5));
+				PLAYERS[plr.ID].AddKillstreak(5);
+				a =  true;
+				break;
 		}
 		case 200:
 		{
-			::AnnounceAll("Player "+plr+" used ~b~Ammo Package!",3);
-			::Message(GREEN+"Player "+plr+" used Ammo Airdrop Package");
-			::FindObject(PLANEID).Pos = ::LOADEDMAP.AirDropPlanePoint1;
-			::FindObject(PLANEID).RotateToEuler(Vector(0.0,0.0,::LOADEDMAP.AirDropAngle),0);
-			::FindObject(PLANEID).MoveTo(::LOADEDMAP.AirDropPlanePoint2,10000);
-			::CreatePickup(405,ZOMBIE_WORLD,1+ rand() % 20 ,::LOADEDMAP.AirDrop,255,true);
-			break;
+				SendDataToClient(plr,StreamData.Killstreak,GetKillstreakName(6));
+				PLAYERS[plr.ID].AddKillstreak(6);
+				a =  true;
+				break;
 		}
 		case 250:
 		{
-			::AnnounceAll("Player "+plr+" used ~b~Chopper Gunner!",3);
-			::Message(GREEN+"Player "+plr+" used Chopper Gunner");
-			AddInChopper(plr);
-			break;
+				SendDataToClient(plr,StreamData.Killstreak,GetKillstreakName(7));
+				PLAYERS[plr.ID].AddKillstreak(7);
+				a =  true;
+				break;
 		}
 		case 300:
 		{
-			::AnnounceAll("Player "+plr+" used ~b~Emergency Airdrop!",3);
-			::Message(GREEN+"Player "+plr+" used Emergency AirDrop");
-			::FindObject(PLANEID).Pos = ::LOADEDMAP.AirDropPlanePoint1;
-			::FindObject(PLANEID).RotateToEuler(Vector(0.0,0.0,::LOADEDMAP.AirDropAngle),0);
-			::FindObject(PLANEID).MoveTo(::LOADEDMAP.AirDropPlanePoint2,10000);
-			::CreateAirDropPickup(Random(5,10));
-			break;
+				SendDataToClient(plr,StreamData.Killstreak,GetKillstreakName(8));
+				PLAYERS[plr.ID].AddKillstreak(8);
+				a =  true;
+				break;
+		}
+		case 350:
+		{
+				SendDataToClient(plr,StreamData.Killstreak,GetKillstreakName(12));
+				PLAYERS[plr.ID].AddKillstreak(12);
+				a =  true;
+				break;
 		}
 		case 400:
 		{
-			::AnnounceAll("Player "+plr+" used ~b~Reaper!",3);
-			::Message(GREEN+"Player "+plr+" used Reaper");
-			::MessagePlayer(RED+"Spam the arrows to control the missiles!",plr);
-			REAPEREnter(plr);
-			break;
+				SendDataToClient(plr,StreamData.Killstreak,GetKillstreakName(9));
+				PLAYERS[plr.ID].AddKillstreak(9);
+				a =  true;
+				break;
 		}
 		case 500:
 		{
-			::AnnounceAll("Player "+plr+" used ~b~Airstrike");
-			::Message(GREEN+"Player "+plr+" used Airstrike");
-			::FindObject(PLANEID).Pos = ::LOADEDMAP.AirDropPlanePoint1;
-			::FindObject(PLANEID).RotateToEuler(Vector(0.0,0.0,::LOADEDMAP.AirDropAngle),0);
-			::FindObject(PLANEID).MoveTo(::LOADEDMAP.AirDropPlanePoint2,10000);
-			::KillAllZombies();
-			::CreateExplosion(ZOMBIE_WORLD,2,LOADEDMAP.spawn1,-1,false);
-			::CreateExplosion(ZOMBIE_WORLD,2,LOADEDMAP.spawn2,-1,false);
-			::CreateExplosion(ZOMBIE_WORLD,2,LOADEDMAP.spawn3,-1,false);
-			break;
+				SendDataToClient(plr,StreamData.Killstreak,GetKillstreakName(10));
+				PLAYERS[plr.ID].AddKillstreak(10);
+				a =  true;
+				break;
 		}
 		case 600:
 		{
-			::AnnounceAll("Player "+plr+" used ~b~Nuke");
-			::Message(GREEN+"Player "+plr+" used Nuke");
-			ZOMBIE_NUKE_TIMER = 11;
-			//plr.Score = 0;
-			break;
+				SendDataToClient(plr,StreamData.Killstreak,GetKillstreakName(11));
+				PLAYERS[plr.ID].AddKillstreak(11);
+				a =  true;
+				break;			
 		}
+		default: break;
 	}
+	if(a)
+	{
+		::MessagePlayer(::RED+"Press [K] to activate!",plr);
+	}
+	
 }
 
 function CreateAirDropPickup(n)
@@ -477,6 +492,7 @@ function UpdateS()
 	}
 	if(ZOMBIE_NUKE_TIMER >0)
 	{
+		ZOMBIE_MUTED = true;
 		ZOMBIE_NUKE_TIMER -= 1;
 		PlaySoundAll(50003);
 		Message("[#ff0000]Nuke incoming in:"+ZOMBIE_NUKE_TIMER);
@@ -511,6 +527,7 @@ function UpdateS()
 		if(ZOMBIE_NUKE_TIMER == -1)
 		{
 			SetWeather(2);
+			ZOMBIE_MUTED = false;
 		}
 	}
 }
@@ -570,7 +587,7 @@ function LotteryItem(player)
 		}
 		case 6:
 		{
-			RandomKillstreakReward();
+			RandomKillstreakReward(player);
 			MessagePlayer("[#00ff00]Killstreak reward!",player);
 			break;
 		}
@@ -636,72 +653,6 @@ function LotteryItem(player)
 		}
 		default: break;
 	}
-}
-function RandomKillstreakReward(player)
-{
-	local oldScore = player.Score, gen = rand () % 12, newScore = 0;
-	switch(gen)
-	{
-		case 0:
-		{
-			newScore = 10; break;
-		}
-		case 1:
-		{
-			newScore = 50; break;
-		}
-		case 2:
-		{
-			newScore = 50; break;
-		}
-		case 3:
-		{
-			newScore = 75; break;
-		}
-		case 4:
-		{
-			newScore = 100; break;
-		}
-		case 5:
-		{
-			newScore = 150; break;
-		}
-		case 6:
-		{
-			newScore = 200; break;
-		}
-		case 7:
-		{
-			newScore = 250; break;
-		}
-		case 8:
-		{
-			newScore = 300; break;
-		}
-		case 9:
-		{
-			newScore = 400; break;
-		}
-		case 10:
-		{
-			newScore = 500; break;
-		}
-		case 10:
-		{
-		newScore = 600; break;
-		}
-		case 11:
-		{
-			newScore = 25; break;
-		}
-		default: 
-		{
-			newScore = 10; break;
-		}
-	}
-	player.Score = newScore;
-	GetKillStreakReward(player);
-	player.Score = oldScore;
 }
 function StartWave()
 {
