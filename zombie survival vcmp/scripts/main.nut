@@ -23,7 +23,6 @@
 		✓ Armour is now more usefull
 	Removed:
 		✓ Nothing
-	Planned to be added for this release:
 */
 
 
@@ -54,8 +53,9 @@ enum StreamData
 	ButtonRight = 9,
 	Hit = 10,
 	Killstreak = 11,
-	AnnounceKillstreak = 12
-	OspreyStopCamera = 13
+	AnnounceKillstreak = 12,
+	OspreyStopCamera = 13,
+	Spectate = 14
 }
 
 enum Perks
@@ -134,18 +134,21 @@ function onPlayerRequestSpawn( player )
 
 function onPlayerSpawn( player )
 {
+	if(PLAYERS[player.ID] != null)
+	{
+		if(PLAYERS[player.ID].Killed == true)
+		{
+			player.SpectateServer();
+			Announce("Wait till the end of the round!",player,1);
+			return 1;
+		}
+	}
 	PLAYERS[player.ID] = Survivor(player);
 	player.Disarm();
 	if(LOADEDMAP == null)
 	{
 		LoadMap();
 	}
-	if(PLAYERS[player.ID].Joined == true)
-	{
-		player.SpectateServer(0);
-		Announce("Wait till the end of the round!",player,1);
-	}
-	else {
 		player.Pos = LOADEDMAP.pos;
 		PLAYERS[player.ID].Joined = true;
 		player.World = ZOMBIE_WORLD;
@@ -157,13 +160,13 @@ function onPlayerSpawn( player )
 		player.Score = 0;
 		player.Health = 100;
 		player.Armour = 0;
-	}
 }
 
 function onPlayerDeath( player, reason )
 {
 	player.World = 1;
 	player.Frozen = false;
+	PLAYERS[player.ID].Killed = true;
 }
 
 function onPlayerKill( player, killer, reason, bodypart )
@@ -551,6 +554,13 @@ function onClientScriptData( player )
 		{
 			PLAYERS[player.ID].UseKillstreak();
 			break;
+		}
+		case StreamData.Spectate:
+		{
+			if(PLAYERS[player.ID].Killed == true)
+			{
+				player.SpectateNextPlayer(PLAYERS[player.ID].CurrentlySpectating);
+			}
 		}
 	}
 }

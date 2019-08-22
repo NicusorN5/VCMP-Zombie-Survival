@@ -18,6 +18,7 @@ class Survivor
 	PlayingInKillStreak = 0;
 	Killstreaks = array(20,-1);
 	Killed = false;
+	CurrentlySpectating = 0;
 }
 enum StreamData
 {
@@ -33,8 +34,9 @@ enum StreamData
 	ButtonRight = 9,
 	Hit = 10,
 	Killstreak = 11,
-	AnnounceKillstreak = 12
-	OspreyStopCamera = 13
+	AnnounceKillstreak = 12,
+	OspreyStopCamera = 13,
+	Spectate = 14
 }
 
 enum Perks
@@ -98,6 +100,7 @@ function Survivor::Update()
 			{
 				this.player.Frozen = false;
 				this.player.Kill();
+				this.Killed = true;
 				::Message(RED+this.player+" was killed by zombies!");
 			}
 			else if(this.player.Health == 1)
@@ -207,16 +210,35 @@ function CPlayer::Kill()
 	this.Health = 0;
 	this.Frozen = false;
 }
-function CPlayer::SpectateServer(initial)
+function CPlayer::SpectateServer()
 {
 	for(local i =0 ; i < 100; i++)
 	{
-		if(i != initial)
+		if(i != this.ID)
 		{
-			if(FindPlayer(i) != null)
+			if(::FindPlayer(i) != null)
 			{
-				this.SpectateTarget = FindPlayer(i);
-				::Announce("Use [SPACE] to spectate next player",player,0);
+				this.SpectateTarget = ::FindPlayer(i);
+				::PLAYERS[this.ID].CurrentlySpectating = i;
+				::Announce("Use [SPACE] to spectate next player",this,0);
+			}
+		}
+	}
+}
+function CPlayer::SpectateNextPlayer(current)
+{
+	for(local i =0 ; i < 100;i++)
+	{
+		if(i != this.ID)
+		{
+			if(i != current)
+			{
+				if(::FindPlayer(i) != null)
+				{
+					this.SpectateTarget = ::FindPlayer(i);
+					::PLAYERS[this.ID].CurrentlySpectating = i;
+					::Announce("Use [SPACE] to spectate next player",this,0);
+				}
 			}
 		}
 	}
@@ -404,8 +426,21 @@ function UpdateS()
 	{
 		ZOMBIE_INTERMISSION -=1;
 		AnnounceAll("~h~Time left until next round:"+ZOMBIE_INTERMISSION,1);
-		if(ZOMBIE_INTERMISSION == 1)
+		if(ZOMBIE_INTERMISSION == 0)
 		{
+			for(local i =0 ; i < 100;i++)
+			{
+				if(PLAYERS[i] != null)
+				{
+					if(PLAYERS[i].Killed == true)
+					{
+						PLAYERS[i].Killed = false;
+						PLAYERS[i].CurrentlySpectating = 0;
+						FindPlayer(i).SpectateTarget = null;
+						onPlayerSpawn(FindPlayer(i));
+					}
+				}
+			}
 			StartWave();
 		}
 	}

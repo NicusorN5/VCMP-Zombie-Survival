@@ -29,6 +29,8 @@
 
 ::K_KEY <- KeyBind(0x4B);
 
+::SPACE_KEY <- KeyBind(0x20);
+
 ::HITMARKER <- GUISprite("Hitmarker.png",VectorScreen((::sX * 0.53) - 16,(::sY * 0.4) - 16));
 ::HITMARKER.Size = VectorScreen(32,32);
 ::HITMARKER.Alpha = 0;
@@ -99,7 +101,8 @@ enum StreamData
 	Hit = 10,
 	Killstreak = 11,
 	AnnounceKillstreak = 12,
-	OspreyStopCamera = 13
+	OspreyStopCamera = 13,
+	Spectate = 14
 }
 
 function GetPerkImage(perk)
@@ -644,6 +647,10 @@ function KeyBind::OnDown(key)
 				break;
 			}
 		}
+	}
+	if(key == ::SPACE_KEY)
+	{
+		SendDataToServer(StreamData.Spectate);
 	}
 }
 function GUI::WindowClose(window)
