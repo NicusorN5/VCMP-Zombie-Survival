@@ -140,7 +140,7 @@ function onPlayerSpawn( player )
 		{
 			player.SpectateServer();
 			Announce("Wait till the end of the round!",player,1);
-			return 1;
+			//return 1;
 		}
 	}
 	PLAYERS[player.ID] = Survivor(player);

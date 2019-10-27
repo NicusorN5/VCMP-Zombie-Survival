@@ -71,7 +71,7 @@ function RemoveFromOSPREY()
 	if(player)
 	{
 		player.WhiteScanlines = false;	
-		player.SetAlpha(255,255);
+		player.SetAlpha(255,0);
 		player.Health = 100;
 		player.Pos = LOADEDMAP.AirDrop;
 	}
