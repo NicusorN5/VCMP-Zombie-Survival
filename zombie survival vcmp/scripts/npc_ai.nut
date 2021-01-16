@@ -12,51 +12,116 @@ ZOMBIE_IMMUNITY <- 0;
 ZOMBIE_SPEED <- 0.2;
 ZOMBIE_MUTED <- false;
 
+enum StreamData
+{
+	Initialise = 0,
+	WeaponShop = 1,
+	GivePerk = 2,
+	ResetPlayer = 3,
+	RemovePerk = 4,
+	Revive = 5,
+	ButtonUp = 6,
+	ButtonDown = 7,
+	ButtonLeft = 8,
+	ButtonRight = 9,
+	Hit = 10
+}
+
 class ZNPC
 {
-	constructor(cname,chealth,cdamage)
+	constructor(pname,phealth,pdmg)
 	{
-		object = ::CreateObject(6001,6,Vector(0,0,0),255);
-		object.TrackingBumps = true;
-		object.TrackingShots = true;
-		name = cname;
-		health = chealth;
-		damage = cdamage;
+		Name = pname;
+		Health = phealth;
+		damage = pdmg;
+		this.Create();
 	}
-	name = "";
-	object = null;
-	originalhealth =0;
-	health =0;
+	BotReference = -1;
+	Health = 0;
+	ActorRef = -1;
 	damage = 0;
+	PlayerRef = -1;
+	Name = "";
+}
+
+SpawnedZombiesCounter <- 0;
+function ZNPC::Create()
+{
+	this.ActorRef = create_actor("Zombie"+SpawnedZombiesCounter,200, 388.031, -473.993, 12.3432, -2.15);
+	this.PlayerRef = GetPlayerIDActor(this.ActorRef);
+	::SpawnedZombiesCounter++;
+	this.Health = 0;
+}
+
+function ZNPC::Respawn()
+{
+	local i = ::FindPlayer(this.PlayerRef);
+	::spawn_actor(this.ActorRef);
+	local p = GetSpawnPos();
+	::correct_actor_pos(this.ActorRef,p.x,p.y,p.z);
+	i.Pos = p;
+	this.Health = ZOMBIE_HEALTH;
+	i.World = ZOMBIE_WORLD;
+	i.Colour = RGB(255,0,0);
+	if(this.Health < 255) 
+	{
+		set_actor_health(this.ActorRef,this.Health);
+		i.Health = this.Health;
+	}
+}
+
+function ZNPC::Damage(player,weapon)
+{
+	local i = ::FindPlayer(this.PlayerRef);
+	SendDataToClient(player,StreamData.Hit,null);
+	local dec = WeaponDMG(weapon) * PLAYERS[player.ID].GetDamagePerkStatus();
+	print("damage = "+dec+" current health "+this.Health); 
+	this.Health -= dec;
+	if(this.Health < 255) 
+	{
+		set_actor_health(this.ActorRef,this.Health);
+		i.Health = this.Health;
+	}
+	if(this.Health <= 0)
+	{
+		kill_actor(this.ActorRef, weapon, player.ID, 0, true);
+		this.Kill(player);
+	}
+}
+function ZNPC::Hurt(player)
+{
+	local i = ::FindPlayer(this.PlayerRef);
+	player.Health -= this.damage;
+	::PlaySound( ZOMBIE_WORLD, 50001, i.Pos );
 }
 function ZNPC::Update()
 {
+	local zombie = ::FindPlayer(this.PlayerRef);
 	if(ZOMBIE_FROZEN > 0) return;
+	local distm = 1000000;
+	local t = -1;
+	local player = null;
 	for(local i =0; i < 100; i++)
 	{
-		local player = FindPlayer(i);
+		player = FindPlayer(i);
+		if(this.PlayerRef == i) continue;
 		if(player != null)
 		{
-			if(this.object.World != player.World ) continue;
+			if(IsActor(i) == true) continue;
+			if(zombie.World != player.World ) continue;
 			if(i == CHOPPER_PLR) continue;
 			if(i == OSPREY_PLR) continue;
-			local distante = ::DistanceFromPoint(this.object.Pos.x,this.object.Pos.y,player.Pos.x,player.Pos.y)
-			if(distante < NPC_FOLLOWDISTANCE);
+			
+			local distantce = ::DistanceFromPoint(zombie.Pos.x,zombie.Pos.y,player.Pos.x,player.Pos.y)
+			if(distantce < distm);
 			{
-				if(this.object.Pos.x > player.Pos.x) this.object.Pos.x -= ZOMBIE_SPEED;
-				if(this.object.Pos.x < player.Pos.x) this.object.Pos.x += ZOMBIE_SPEED;
-				if(this.object.Pos.y > player.Pos.y) this.object.Pos.y -= ZOMBIE_SPEED;
-				if(this.object.Pos.y < player.Pos.y) this.object.Pos.y += ZOMBIE_SPEED;
-				if(this.object.Pos.z > player.Pos.z) this.object.Pos.z -= ZOMBIE_SPEED;
-				if(this.object.Pos.z < player.Pos.z) this.object.Pos.z += ZOMBIE_SPEED;
-				this.object.RotateToEuler(Vector(0,0,player.Angle),0);
-				local r = rand () % 100;
-				if(r == 0)
-				{
-					if(!ZOMBIE_MUTED) ::PlaySound( ZOMBIE_WORLD, 50001, this.object.Pos );
-				}
-			}	
-			if(distante < 2 && PLAYERS[player.ID].NeedToBeSaved == false)
+				distm = distantce;
+				t = i;
+			}
+			local r = rand () % 100;
+			if(r == 0) if(!ZOMBIE_MUTED) ::PlaySound( ZOMBIE_WORLD, 50001, zombie.Pos );
+			
+			if(distantce < 2 && PLAYERS[player.ID].NeedToBeSaved == false)
 			{
 				if(player.Armour > 0)
 				{
@@ -73,74 +138,55 @@ function ZNPC::Update()
 			}			
 		}
 	}
+	if(player)
+	{
+		local theta = player.Angle + 3.1415926;
+		set_actor_angle(this.ActorRef,theta);
+		this.Pos += Vector(sin(theta),cos(theta),0);
+		correct_actor_pos(this.ActorRef,this.Pos);
+		zombie.SetAnim(0,1);
+	}
 }
 function ZNPC::Kill(killer)
 {
+	local i = FindPlayer(this.PlayerRef);
+	if(i == null) return;
 	local rng = rand() % 10;
 	if(rng == 5)
 	{
-		if(ZOMBIE_INTERMISSION <= 0) ::CreatePickup(383,ZOMBIE_WORLD,1,this.object.Pos,255,true);
+		if(ZOMBIE_INTERMISSION <= 0) ::CreatePickup(383,ZOMBIE_WORLD,1,i.Pos,255,true);
 	}
-	if(this.object.World ==  ZOMBIE_WORLD)
+	if(i.World == ZOMBIE_WORLD)
 	{
-		if(!ZOMBIE_MUTED) ::PlaySound( ZOMBIE_WORLD, 50002, this.object.Pos );
+		if(!ZOMBIE_MUTED) ::PlaySound( ZOMBIE_WORLD, 50002, i.Pos );
 	}
-	if(::ZOMBIEDEATHEX == true)::CreateExplosion(this.object.World,1,this.object.Pos,-1,false);
-	this.object.Pos = GetSpawnPos();
-	this.object.World = 6;
+	if(::ZOMBIEDEATHEX == true) ::CreateExplosion(ZOMBIE_WORLD,1,i.Pos,this.PlayerRef,false);
 	if(killer != null)
 	{
 		if(ZOMBIE_DOUBLE > 0) killer.Cash += ZOMBIE_HEALTH*2;
 		else killer.Cash += ZOMBIE_HEALTH;
 		killer.Score += 1;
-		GetKillStreakReward(killer);
+		::GetKillStreakReward(killer);
 	}
+	i.World = 1;
+	i.Pos = Vector(0,0,0);
+	correct_actor_pos(this.ActorRef,0,0,0);
 	ZOMBIE_REMAINING -= 1;
 }
-function ZNPC::Respawn()
-{
-	this.object.Pos = GetSpawnPos();
-	this.object.World = ZOMBIE_WORLD;
-	this.health = ZOMBIE_HEALTH;
-}
-function ZNPC::Damage(player,weapon)
-{
-	SendDataToClient(player,StreamData.Hit,null);
-	this.health -= WeaponDMG(weapon) * PLAYERS[player.ID].GetDamagePerkStatus();
-	if(this.health <= 0 ) this.Kill(player);
-}
-function ZNPC::Hurt(player)
-{
-	player.Health -= this.damage;
-	::PlaySound( ZOMBIE_WORLD, 50001, this.object.Pos );
-}
 
-enum StreamData
+function GetSpawnPos()
 {
-	Initialise = 0,
-	WeaponShop = 1,
-	GivePerk = 2,
-	ResetPlayer = 3,
-	RemovePerk = 4,
-	Revive = 5,
-	ButtonUp = 6,
-	ButtonDown = 7,
-	ButtonLeft = 8,
-	ButtonRight = 9,
-	Hit = 10
-}
-
-function GetNPC(objectID)
-{
-	for(local i =0 ; i < MAX_NPCS; i++)
+	if(LOADEDMAP != null)
 	{
-		if(ZOMBIES[i] != null)
-		{
-			if(ZOMBIES[i].object.ID == objectID) return i;
-		}
+		local r = rand() % 3;
+		if(r == 0) return LOADEDMAP.spawn1;
+		if(r == 1) return LOADEDMAP.spawn2;
+		if(r == 2) return LOADEDMAP.spawn3;
+		return LOADEDMAP.spawn3;
 	}
-	return -1;
+	return Vector(0,0,0);
 }
+
 function WeaponDMG(weapon)
 {
 	local hp = 25
@@ -176,16 +222,4 @@ function WeaponDMG(weapon)
 
 	if(ZOMBIE_INSTAKILL > 0) return 10*hp;
 	return hp;
-}
-function GetSpawnPos()
-{
-	if(LOADEDMAP != null)
-	{
-		local r = rand() % 3;
-		if(r == 0) return LOADEDMAP.spawn1;
-		if(r == 1) return LOADEDMAP.spawn2;
-		if(r == 2) return LOADEDMAP.spawn3;
-		return LOADEDMAP.spawn3;
-	}
-	return Vector(0,0,0);
 }

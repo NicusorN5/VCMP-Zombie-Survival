@@ -102,7 +102,8 @@ enum StreamData
 	Killstreak = 11,
 	AnnounceKillstreak = 12,
 	OspreyStopCamera = 13,
-	Spectate = 14
+	Spectate = 14,
+	ShotPlayer = 15,
 }
 
 function GetPerkImage(perk)
@@ -148,6 +149,18 @@ function Script::ScriptProcess()
 
 function Player::PlayerShoot( player, weapon, hitEntity, hitPosition )
 {
+	local lplr = World.FindLocalPlayer();
+	if(player == lplr)
+	{
+		if(hitEntity != null)
+		{
+			if(hitEntity.Type == OBJ_PLAYER)
+			{
+				SendDataToServer(StreamData.ShotPlayer,hitEntity.ID+" "+weapon);
+				Console.Print("hit player");
+			}
+		}
+	}
 }
 
 function Server::ServerData( stream )

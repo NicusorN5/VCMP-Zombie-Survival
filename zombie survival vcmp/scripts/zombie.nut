@@ -384,6 +384,7 @@ function CreateAirDropPickup(n)
 		}
 	}
 }
+ZombiesToSpawn <- 0;
 function UpdateS()
 {
 	if(ZOMBIE_DEBUG == true) return;
@@ -393,11 +394,11 @@ function UpdateS()
 		ZOMBIE_PAUSE -= 1;
 		return;
 	}
-	local ZombiesToSpawn = ZOMBIE_REMAINING;
 	local players_remaining =0;
 	for(local i =0; i < 100;i++)
 	{
 		local player = FindPlayer(i);
+		if(IsActor(i)) continue;
 		if(player)
 		{
 			if(player.World == ZOMBIE_WORLD)
@@ -409,16 +410,6 @@ function UpdateS()
 					survivor = PLAYERS[player.ID];
 				}
 				survivor.Update();
-			}
-		}
-	}
-	for(local i =0 ; i < MAX_NPCS; i++)
-	{
-		if(ZOMBIES[i] != null)
-		{
-			if(ZOMBIES[i].object.World == ZOMBIE_WORLD)
-			{
-				ZombiesToSpawn -= 1;
 			}
 		}
 	}
@@ -444,23 +435,6 @@ function UpdateS()
 			StartWave();
 		}
 	}
-	if(ZOMBIE_REMAINING != 0)
-	{
-		if(!ZOMBIE_INTERMISSION)
-		{
-			if(ZombiesToSpawn)
-			{
-				for(local i =0; i < MAX_NPCS;i++)
-				{
-					if(ZOMBIES[i].object.World != ZOMBIE_WORLD)
-					{
-						ZOMBIES[i].Respawn();
-						break;
-					}
-				}
-			}
-		}	
-	}
 	if(ZOMBIE_REMAINING <= 0) 
 	{
 		if(!ZOMBIE_INTERMISSION)
@@ -470,6 +444,21 @@ function UpdateS()
 			if(ZOMBIE_WAVE == 21)
 			{
 				ZS_Win();
+			}
+		}
+	}
+	else
+	{
+		if(ZombiesToSpawn > 0)
+		{
+			for(local i = 0 ; i < MAX_NPCS;i++)
+			{
+				local inst = ::FindPlayer(ZOMBIES[i].PlayerRef);
+				if(inst.World != ZOMBIE_WORLD)
+				{
+					ZOMBIES[i].Respawn();
+					ZombiesToSpawn -= 1;
+				}
 			}
 		}
 	}
@@ -508,22 +497,7 @@ function UpdateS()
 	}
 	if(ZOMBIE_UAV > 0)
 	{
-		for(local i =0 ; i < 20;i++)
-		{
-			DestroyMarker(ZOMBIE_UAV_ARRAY[i]);
-
-			if(ZOMBIES[i].object.World == ZOMBIE_WORLD) {
-				ZOMBIE_UAV_ARRAY[i] = CreateMarker( ZOMBIE_WORLD, ZOMBIES[i].object.Pos, 2, RGB(255,255,0), 0 );
-			}
-		}
-		ZOMBIE_UAV -= 1;
-		if(ZOMBIE_UAV == 0)
-		{
-			for(local i =0 ; i < 20;i++)
-			{
-				DestroyMarker(ZOMBIE_UAV_ARRAY[i]);
-			}
-		}
+		
 	}
 	if(ZOMBIE_NUKE_TIMER >0)
 	{
@@ -826,6 +800,7 @@ function StartWave()
 			break;
 		}
 	}
+	ZombiesToSpawn = ZOMBIE_REMAINING;
 	AnnounceAll("~o~Wave "+ZOMBIE_WAVE,3);
 }
 function PlaySoundAll(sound)

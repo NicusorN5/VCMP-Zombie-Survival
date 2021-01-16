@@ -63,8 +63,8 @@ function PredatorDetonate()
 	::CreateExplosion(ZOMBIE_WORLD,2,MissilePos,-1,false);
 	for(local i =0 ; i < 20;i++)
 	{
-		local victim = ZOMBIES[i];
-		if(DistanceFromPoint(victim.object.Pos.x,victim.object.Pos.y,MissilePos.x,MissilePos.y) <= 30)
+		local victim = ::FindPlayer(ZOMBIES[i].PlayerRef);
+		if(DistanceFromPoint(victim.Pos.x,victim.Pos.y,MissilePos.x,MissilePos.y) <= 30)
 		{
 			if(victim.object.World == ZOMBIE_WORLD)
 			{

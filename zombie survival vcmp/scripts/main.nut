@@ -3,7 +3,7 @@
 			ZOMBIE SURVIVAL 0.4
 							by Athanatos
 	
-	Update for Zombie Survival 0.4. See the changelog...
+	Update for Zombie Survival 1.0 See the changelog...
 	
 	
 	
@@ -13,16 +13,19 @@
 	'--' <- (to be added)
 	'X' <- (not added)
 	
+	BREAKING CHANGES:
+		✓ Zombie NPC replaced with Zombie bots
+	
 	Added:
-		✓ Killstreak Icons
-		✓ Killstreak UI announce
-		✓ New killstreak: Osprey Gunner
+		✓ New killstreak: Sentry Gun
+		✓ New killstreak: Alpha Squad (?)
 	Changed:
-		✓ How killstreaks generally work
-		✓ Fixed some player resetting issues when starting a new round
-		✓ Armour is now more usefull
+		✓ Nothing
 	Removed:
 		✓ Nothing
+		
+	Credits to:
+		-> habi (his actor64 plugin)
 */
 
 
@@ -55,7 +58,8 @@ enum StreamData
 	Killstreak = 11,
 	AnnounceKillstreak = 12,
 	OspreyStopCamera = 13,
-	Spectate = 14
+	Spectate = 14,
+	ShotPlayer = 15,
 }
 
 enum Perks
@@ -89,23 +93,33 @@ LOADEDMAP <- null;
 function onScriptLoad()
 {
 	print("Loading scripts...");
-	SetServerName("Zombie Survival 0.4");
-	SetGameModeName("Zombie Survival 0.4");
+	SetServerName("Zombie Survival 1.0");
+	SetGameModeName("Zombie Survival 1.0");
+	//SetPassword("theta");
 	SetTime(0,0);
 	SetWeather(2);
 	SetShootInAir(true);
 	SetFriendlyFire(true);
 	PLANEID <- CreateObject(638,ZOMBIE_WORLD,Vector(0,0,0),255).ID;
+	set_port("5192");
 	for(local i =0; i < MAX_NPCS;i++)
 	{
 		ZOMBIES[i] = ZNPC("Zombie",100,25);
 	}
 	print("<=====================================>");
-	print("VC:MP Zombie Survival 0.4 by Athanatos");
-	print("<== KILLSTREAK SYSTEM UPDATE ==>");
+	print("VC:MP Zombie Survival 1.0 by Athanatos");
+	print("<== ZOMBIE BOT UPDATE ==>");
 	print("<=====================================>");
 	print("Scripts Loaded Successfully!");
-	print("You are free to modify, publish and host this server how much you want, BUT please keep a little credit to me(Athanatos)");
+	print("You are free to modify, publish and host this server how much you want!");
+	print("Credits to habi for his bot plugin!");
+}
+
+function twoSecAfterStart()
+{
+    print("Bots will now join the server.");
+	//ZOMBIES[0] = ZNPC("Zombie",100,25);
+	create_actor("Zombie",5, 388.031, -473.993, 12.3432, -2.15);
 }
 
 function onScriptUnload()
@@ -114,11 +128,17 @@ function onScriptUnload()
 
 function onPlayerJoin( player )
 {
+	if(IsActor(player.ID))
+	{
+		player.Colour = RGB(255,0,0);
+		return;
+	}
 	MessagePlayer(GREEN+"Welcome "+RED+player+GREEN+" to "+BLUE+"Zombie Survival 0.4",player);
 }
 
 function onPlayerPart( player, reason )
 {
+	if(IsActor(player.ID)) return;
 	PLAYERS[player.ID] = null;
 }
 
@@ -134,6 +154,7 @@ function onPlayerRequestSpawn( player )
 
 function onPlayerSpawn( player )
 {
+	if(IsActor(player.ID)) return;
 	if(PLAYERS[player.ID] != null)
 	{
 		if(PLAYERS[player.ID].Killed == true)
@@ -164,6 +185,7 @@ function onPlayerSpawn( player )
 
 function onPlayerDeath( player, reason )
 {
+	if(IsActor(player.ID)) return;
 	player.World = 1;
 	player.Frozen = false;
 	PLAYERS[player.ID].Killed = true;
@@ -171,10 +193,12 @@ function onPlayerDeath( player, reason )
 
 function onPlayerKill( player, killer, reason, bodypart )
 {
+	if(IsActor(killer.ID)) return;
 }
 
 function onPlayerTeamKill( player, killer, reason, bodypart )
 {
+	if(IsActor(killer.ID)) return;
 }
 
 function onPlayerChat( player, text )
@@ -562,6 +586,18 @@ function onClientScriptData( player )
 				player.SpectateNextPlayer(PLAYERS[player.ID].CurrentlySpectating);
 			}
 		}
+		case StreamData.ShotPlayer:
+		{
+			local victim = GetTok(str," ",1).tointeger();
+			local wep = GetTok(str," ",2).tointeger();
+			
+			if(IsActor(victim))
+			{
+				print("zombie was hit");
+				local actor = GetActorID(victim);
+				ZOMBIES[actor].Damage(player,wep);
+			}
+		}
 	}
 }
 function GetTok(string, separator, n, ...)
@@ -704,20 +740,10 @@ function onPickupRespawn( pickup )
 }
 function onObjectShot( object, player, weapon )
 {
-	local id = GetNPC(object.ID);
-	if(id != -1)
-	{
-		ZOMBIES[id].Damage(player,player.Weapon);
-	}
 }
 
 function onObjectBump( object, player )
 {
-	local id = GetNPC(object.ID);
-	if(id != -1)
-	{
-		ZOMBIES[id].Hurt(player);
-	}
 }
 
 function CheckpointColors(checkpoint,Colour)
